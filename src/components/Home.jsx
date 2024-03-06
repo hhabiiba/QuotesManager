@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import quotesData from '../../data/quotesList.json';
 
 const Home = () => {
-  const quoteOfTheDay = { 
-    quote: "The only way to do great work is to love what you do.",
-    author: "Steve Jobs"
+  const [quoteOfTheDay, setQuoteOfTheDay] = useState(null);// to hold quote of the day..
+
+  useEffect(() => { // useEffect hook to run once on component mount..
+    const randomIndex = Math.floor(Math.random() * quotesData.quotes.length);// generate a random index to select a random quote..
+    const randomQuote = quotesData.quotes[randomIndex]; // get a random quote from quotesData usin' the random index
+    setQuoteOfTheDay(randomQuote); // Set the random quote as quote of the day..
+  }, []);
+
+  const shareOnTwitter = () => {
+    const text = `${quoteOfTheDay.quote} - ${quoteOfTheDay.author}`;// text for tweet, combinin' the quote nd author..
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;// URL for the tweet, encodin' the text parameter..
+    window.open(url, '_blank'); // Open a new window wid the Twitter intent URL..
   };
 
   return (
     <div>
       <h3>Quote of the Day</h3>
-      <div>
-        <blockquote>{quoteOfTheDay.quote}</blockquote>
-        <p>- {quoteOfTheDay.author}</p>
-      </div>
+      {quoteOfTheDay && ( // check if quoteOfTheDay is nt null..
+        <div>
+          <blockquote>{quoteOfTheDay.quote}</blockquote>
+          <p>- {quoteOfTheDay.author}</p>
+          <button onClick={shareOnTwitter}>Share on Twitter</button>
+        </div>
+      )}
       <h3>Categories</h3>
       <ul>
         <li>
