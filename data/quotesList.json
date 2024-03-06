@@ -1,15 +1,483 @@
 {
-  "name": "Inspirational Quotes",
   "quotes": [
     {
-      "quote": "The only way to do great work is to love what you do.",
-      "author": "Steve Jobs",
-      "category": "inspirational"
+      "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall." ,
+      "author": "Nelson Mandela",
+      "category": "Inspirational"
+    },
+    {
+      "quote":"In the middle of difficulty lies opportunity.",
+      "author": "Albert Einstein",
+      "category": "Inspirational"
+    },
+    {
+      "quote": "You are never too old to set another goal or to dream a new dream.",
+      "author": "C.S. Lewis",
+      "category": "Inspirational"
+    },
+    {
+      "quote": "The only way to achieve the impossible is to believe it is possible.",
+      "author": "Charles Kingsleigh",
+      "category": "Inspirational"
+    },
+    {
+      "quote": "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.",
+      "author": "Albert Schweitzer",
+      "category": "Inspirational"
+    },
+    {
+      "quote": "The future belongs to those who believe in the beauty of their dreams.", 
+      "author": "Brian Tracy",
+      "category": "Inspirational"
     },
     {
       "quote": "Believe you can and you're halfway there.",
       "author": "Theodore Roosevelt",
-      "category": "inspirational"
+      "category": "Inspirational"
+    },
+    {
+      "quote": "No matter how dark the night, morning always comes, and our journey begins anew.",
+      "author": "Lao Tzu ", 
+      "category": "Inspirational"
+    },
+    {
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author":  "Franklin D. Roosevelt",
+      "category": "Inspirational"
+    },
+    {
+      "quote":  "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.",
+      "author":  "Steve Jobs",
+      "category": "Motivational"
+    },
+    {
+      "quote":  "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+      "author":  "Winston Churchill",
+      "category": "Motivational"
+    },
+    {
+      "quote":  "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author":  "Franklin D. Roosevelt",
+      "category": "Motivational"
+    },
+    {
+      "quote": "The future belongs to those who believe in the beauty of their dreams.",
+      "author": "Eleanor Roosevelt",
+      "category": "Motivational"
+    },
+    {
+      "quote": "Your present circumstances don't determine where you can go; they merely determine where you start.",
+      "author": "Nido Qubein",
+      "category": "Motivational"
+    },
+    {
+      "quote":"Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful." ,
+      "author": "Albert Schweitzer",
+      "category": "Motivational"
+    },
+    {
+      "quote": "The only person you are destined to become is the person you decide to be.",
+      "author": "Ralph Waldo Emerson ",
+      "category": "Motivational"
+    },
+    {
+      "quote": "Opportunities don't happen, you create them.",
+      "author": "Chris Grosser",
+      "category": "Motivational"
+    },
+    {
+      "quote": "The harder you work for something, the greater you'll feel when you achieve it.",
+      "author": "Unknown",
+      "category": "Motivational"
+    },
+    {
+      "quote": "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+      "author": "Zig Ziglar",
+      "category": "Motivational"
+    },
+    {
+      "quote": "The code you write today is the legacy you leave for tomorrow.",
+      "author": "Anonymous",
+      "category": "Coders"
+    },
+    {
+      "quote": "Coding is the closest thing we have to a superpower.",
+      "author": "Drew Houston",
+      "category": "Coders"
+    },
+    {
+      "quote": "Programmers are not just problem solvers, they are solution architects." ,
+      "author": "John Johnson",
+      "category": "Coders"
+    },
+    {
+      "quote": "Coders: turning caffeine into code, emotions into algorithms."  ,
+      "author": "Al Capone",
+      "category": "Coders"
+    },
+    {
+      "quote":  "Emotions in bits, logic in bytes - that's the world of a coder." ,
+      "author": "Unknown",
+      "category": "Coders"
+    },
+    {
+      "quote": "Coding is the art of turning ideas into instructions for machines to follow." ,
+      "author": "Chris Pine",
+      "category": "Coders"
+    },
+    {
+      "quote": "Coding is not just about typing lines; it's about crafting digital experiences.",
+      "author": "Bill Gates",
+      "category": "Coders"
+    },
+    {
+      "quote": "The best code is like poetry; it is concise, elegant, and powerful." ,
+      "author": "Anonymous",
+      "category": "Coders"
+    },
+    {
+      "quote": "Coding is a journey of self-discovery, where every bug fixed is a lesson learned.",
+      "author": " Linus Torvalds",
+      "category": "Coders"
+    },
+    {
+      "quote": "Coding is the language of the future, and those who speak it will shape tomorrow." ,
+      "author": "Mark Zuckerberg",
+      "category": "Coders"
+    },
+    {
+      "quote": "Love is composed of a single soul inhabiting two bodies." ,
+      "author": "Aristotle",
+      "category": "Love"
+    },
+    {
+      "quote":"The best love is the kind that awakens the soul; that makes us reach for more, that plants the fire in our hearts and brings peace to our minds."  ,
+      "author": "Nicholas Sparks",
+      "category": "Love"
+    },
+    {
+      "quote": "Love is not about how much you say 'I love you,' but how much you can prove that it's true." ,
+      "author": "Unknown",
+      "category": "Love"
+    },
+    {
+      "quote": "I have found the one whom my soul loves.",
+      "author": "Song of Solomon",
+      "category": "Love"
+    },
+    {
+      "quote": "To love and be loved is to feel the sun from both sides.",
+      "author": "David Viscott",
+      "category": "Love"
+    },
+
+    {
+      "quote": "Love is when the other person's happiness is more important than your own." ,
+      "author": "H. Jackson Brown Jr.",
+      "category": "Love"
+    },
+
+    {
+      "quote": "Love is like the wind, you can't see it but you can feel it.",
+      "author": "Nicholas Sparks ",
+      "category": "Love"
+    },
+    {
+      "quote": "The best thing to hold onto in life is each other." ,
+      "author": "Audrey Hepburn",
+      "category": "Love"
+    },
+    {
+      "quote": "Love doesn't make the world go 'round. Love is what makes the ride worthwhile.",
+      "author": "Franklin P. Jones ",
+      "category": "Love"
+    },
+    {
+      "quote":"In your light, I learn how to love. In your beauty, how to make poems. You dance inside my chest where no one sees you, but sometimes I do, and that sight becomes this art."  ,
+      "author": "Rumi",
+      "category": "Love"
+    },
+    {
+      "quote":  "Friendship is born at that moment when one person says to another, 'What! You too? I thought I was the only one.'",
+      "author": "C.S. Lewis",
+      "category": "Friendship"
+    },
+    {
+      "quote": "A real friend is one who walks in when the rest of the world walks out.",
+      "author": "Walter Winchell",
+      "category": "Friendship"
+    },
+    {
+      "quote": "Friendship is the only cement that will ever hold the world together." ,
+      "author": "Woodrow Wilson",
+      "category": "Friendship"
+    },
+    {
+      "quote":"Friendship is the golden thread that ties the heart of all the world." ,
+      "author": "John Evelyn ",
+      "category": "Friendship"
+    },
+    {
+      "quote": "Friends show their love in times of trouble, not in happiness.",
+      "author": "Euripides",
+      "category": "Friendship"
+    },
+    {
+      "quote": "A friend is someone who knows all about you and still loves you." ,
+      "author": " Elbert Hubbard ",
+      "category": "Friendship"
+    },
+    {
+      "quote":"Friendship is the shadow of the evening, which increases with the setting sun of life.",
+      "author": "Jean de La Fontaine ",
+      "category": "Friendship"
+    },
+    {
+      "quote":"In the sweetness of friendship let there be laughter and sharing of pleasures. For in the dew of little things the heart finds its morning and is refreshed." ,
+      "author": "Khalil Gibran",
+      "category": "Friendship"
+    },
+    {
+      "quote":"In the sweetness of friendship let there be laughter and sharing of pleasures. For in the dew of little things the heart finds its morning and is refreshed."  ,
+      "author": "Len Wein",
+      "category": "Friendship"
+    },
+    {
+      "quote": "Friendship marks a life even more deeply than love. Love risks degenerating into obsession, friendship is never anything but sharing." ,
+      "author": "Elie Wiesel",
+      "category": "Friendship"
+    },
+    {
+      "quote": "I'm not clumsy, it's just the floor hates me, the tables and chairs are bullies, and the walls get in my way.",
+      "author": "Unknown",
+      "category": "Funny"
+    },
+    {
+      "quote": "I told my wife she was drawing her eyebrows too high. She looked surprised."  ,
+      "author": "Unknown",
+      "category": "Funny"
+    },
+    {
+      "quote": "I'm on a whiskey diet. I've lost three days already.",
+      "author": "Tommy Cooper",
+      "category": "Funny"
+    },
+    {
+      "quote":"I'm not lazy, I'm on energy-saving mode." ,
+      "author": "Unknown",
+      "category": "Funny"
+    },
+    {
+      "quote": "I'm not arguing, I'm just explaining why I'm right.",
+      "author": "Unknown ",
+      "category": "Funny"
+    },
+    {
+      "quote": "I told my computer I needed a break, now it won't stop sending me vacation ads.",
+      "author": "Unknown ",
+      "category": "Funny"
+    },
+    {
+      "quote":"I'm not a complete idiot, some parts are missing."  ,
+      "author": "Unknown",
+      "category": "Funny"
+    },
+    {
+      "quote": "I don't need anger management. I need people to stop making me angry." ,
+      "author": "Unknown",
+      "category": "Funny"
+    },
+    {
+      "quote": "I'm not short, I'm just more down to earth than most people.",
+      "author": "Unknown",
+      "category": "Funny"
+    },
+    {
+      "quote": "I'm not old, I'm a classic.",
+      "author": "Unknown",
+      "category": "Funny"
+    },
+    {
+      "quote": "Patience is a pillar of faith. To be patient means to endure silently and without complaint the tests of life." ,
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote": "Kindness is a mark of faith, and whoever is not kind has no faith.",
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote": "The best among you are those who have the best manners and character.",
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote":"Do not let your difficulties fill you with anxiety, after all, it is only in the darkest nights that stars shine more brightly." ,
+      "author": "Imam Ali ibn Abi Talib",
+      "category": "Islamic"
+    },
+
+    {
+      "quote": "The strongest among you is the one who controls his anger." ,
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote": "Do good, even if others do not reciprocate. For the reward of goodness lies not in the response of others, but in the satisfaction of Allah." ,
+      "author": "Unknown ",
+      "category": "Islamic"
+    },
+    {
+      "quote": "Forgiveness is the attribute of the strong.",
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote": "Speak good or remain silent." ,
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote":"The best of people are those who are most beneficial to people."  ,
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote": "When you see a person who has been given more than you in money and beauty, look to those who have been given less.",
+      "author": "Prophet Muhammad (PBUH)",
+      "category": "Islamic"
+    },
+    {
+      "quote": "Mohabbat mein judai ka dard, dil ko chhoo kar rula deta hai." ,
+      "author": "Mirza Ghalib",
+      "category": "Urdu-Hindi"
+    },
+    {
+      "quote": "Dil ko behlane ke liye khayal achha hai, par uske baad khud ko sambhalna mushkil.",
+      "author": " Faiz Ahmed Faiz",
+      "category": "Urdu-Hindi"
+    }, 
+    {
+      "quote": "Dil ki baat chhupana, tootne ki nishani hai."  ,
+      "author": "Jaun Elia",
+      "category": "Urdu-Hindi"
+    }, 
+    {
+      "quote": "Tere bina duniya kya, jannat bhi adhuri hai..Tere bina jeena kya, marna bhi mushkil hai",
+      "author": "Habiba",
+      "category": "Urdu-Hindi"
+    }, 
+    {
+      "quote": "Dhoondta hu tujhe har subah, har sham mein..Per dil mein hai ye darr, kahin tu na ho matlabi insaan ke naam mein",
+      "author": "Habiba",
+      "category": "Urdu-Hindi"
+    }, 
+    {
+      "quote": "Kisi ke dil mein basna, toh bas dil ko todne ke liye hota hai.",
+      "author": "Mohsin Naqvi",
+      "category": "Urdu-Hindi"
+    }, 
+    {
+      "quote": "Zindagi ke safar mein, naseeb ka silsila hai..Allah ki rehmat se sabar ka silsila hai",
+      "author": "Wasi Shah",
+      "category": "Urdu-Hindi"
+    }, 
+    {
+      "quote": "Dil ka dard kisi ko batana nahi aata, isliye log mohabbat ka izhar karte hain." ,
+      "author": "Javed Akhtar",
+      "category": "Urdu-Hindi"
+    },
+    {
+      "quote": "Haters are just confused admirers because they can't figure out the reason why everyone loves you."  ,
+      "author": "Jeffree Star",
+      "category": "Other"
+    },
+    {
+      "quote":  "I'd rather be hated for who I am than loved for who I am not.",
+      "author": "Kurt Cobain",
+      "category": "Other"
+    },
+    {
+      "quote":  "Don't let negative and toxic people rent space in your head. Raise the rent and kick them out." ,
+      "author": "Robert Tew",
+      "category": "Other"
+    },
+    {
+      "quote":  "The closer one gets, the more venom they tend to send",
+      "author": "Habiba",
+      "category": "Other"
+    },
+    {
+      "quote": "Keep your circle small and your middle finger high."  ,
+      "author": "Unknown",
+      "category": "Other"
+    },
+    {
+      "quote":  "They wanna see you do good, but never better than them. Remember that.",
+      "author": " Unknown ",
+      "category": "Other"
+    },
+    {
+      "quote": "Don't be distracted by criticism. Remember, the only taste of success some people get is to take a bite out of you." ,
+      "author": " Zig Ziglar",
+      "category": "Other"
+    },
+    {
+      "quote": "It's not bragging if you can back it up." ,
+      "author": "Muhammad Ali",
+      "category": "Other"
+    },
+    {
+      "quote": "The closer you are, the deeper the ow!" ,
+      "author": "Habiba",
+      "category": "Other"
+    },
+    {
+      "quote": "Don't mistake my kindness for weakness. I am kind to everyone, but when someone is unkind to me, weak is not what you are going to remember about me." ,
+      "author": "Al Capone ",
+      "category": "Other"
+    },
+    {
+      "quote": "I'd rather die like a man than live like a coward."  ,
+      "author": "Tupac Shakur",
+      "category": "Other"
+    },
+    {
+      "quote": "Love's game, i've chosen to resign. No longer fooled by its deceptive shine." ,
+      "author": "Habiba",
+      "category": "Other"
+    },
+    {
+      "quote":  "I'm not a businessman; I'm a business, man!",
+      "author": "Jay-Z",
+      "category": "Other"
+    },
+    {
+      "quote": "You have enemies? Good. That means you've stood up for something, sometime in your life." ,
+      "author": "Winston Churchill ",
+      "category": "Other"
+    },
+    {
+      "quote": "By the way you shouldn't have drifted like this away, Had this pen now not been mute, night and day."  ,
+      "author": "Habiba",
+      "category": "Other"
+    },
+    {
+      "quote": "If you want to fly, you have to give up the things that weigh you down." ,
+      "author": "Unknown",
+      "category": "Other"
+    },
+    {
+      "quote": "I'm on a whiskey diet. I've lost three days already."  ,
+      "author": "Tommy Cooper",
+      "category": "Other"
+    },
+    {
+    "quote": "I'm not short, I'm just more down to earth than most people.",
+    "author": "Unknown",
+    "category": "Other"
     }
   ]
+  
 }
