@@ -13,6 +13,11 @@ const Categories = () => {
     setQuotes(filteredQuotes);// Set the filtered quotes to the state..
   }, [category]);// Re-run the effect when the category changes..
 
+  const handleDeleteQuote = (quote) => {
+    const updatedQuotes = quotes.filter(q => q !== quote);// filter out the quote to be deleted from the current list of quotes..
+    setQuotes(updatedQuotes)
+  }
+
   return (
     <div>
       <h3>List of Quotes - {category}~</h3>
@@ -21,7 +26,8 @@ const Categories = () => {
           <blockquote key={index}>
             <p><strong>Quote:    </strong><q>{quote.quote}</q></p>
             <p><strong>Author:   </strong>-  {quote.author}</p>
-            <p><strong>Category: </strong>   {quote.category}</p><br />
+            <p><strong>Category: </strong>   {quote.category}</p>
+            <button onClick={() => handleDeleteQuote(quote)}>&#10060;</button>
           </blockquote>
         ))}
     </div>
@@ -29,3 +35,4 @@ const Categories = () => {
 };
 
 export default Categories;
+
