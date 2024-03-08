@@ -7,7 +7,14 @@ import {
 } from 'react-router-dom'
 import Home from './components/Home'
 import Category from './components/Category';
+import AddQuote from './components/AddQuote';
+
 const App = () => {
+
+  const handleAdd = (newQuote) => { //func. for addin' newQuotes..
+    console.log ('adding quote', newQuote)
+  }
+  
   return (
     <>
     <Router>
@@ -21,6 +28,7 @@ const App = () => {
         </nav>
         <main>
           <Home />
+          <AddQuote onAdd={handleAdd}/>
         </main>
         <Routes>
           <Route path="/category/:category" element={<Category />} />
