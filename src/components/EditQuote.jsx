@@ -5,15 +5,19 @@ const EditForm = ({ onUpdate }) => {
   const [selectedCategory, setSelectedCategory] = useState('');  //keeps track of the category selected by the user..
   const [quotesForSelectedCategory, setQuotesForSelectedCategory] = useState([]);  //stores an arr. of quotes tht belong to the currently selected category..
   const [selectedQuote, setSelectedQuote] = useState(null);   //stores the quote currently being edited..
-  const [quoteText, setQuoteText] = useState('');            //stores the text of the q..
-  const [author, setAuthor] = useState('');                 //stores the author of the q..
-  const [category, setCategory] = useState('');            //stores the category of the q..
+  const [formData, setFormData] = useState({                 //stores the quoteText, author, category of the q..
+    quoteText: '',
+    author: '',
+    category: ''
+  });            
   const [isEditing, setIsEditing] = useState(false);      //tracks whether a quote is being edited..
 
   useEffect(() => {
-    setQuoteText('');
-    setAuthor('');
-    setCategory('');
+    setFormData({
+      quoteText:'',
+      author: '',
+      category:''
+    });
     setIsEditing(false);
   }, [selectedCategory]);
 
@@ -25,17 +29,27 @@ const EditForm = ({ onUpdate }) => {
 
   const handleQuoteSelect = (text) => {   //handles selectin' a quote for editin'..
     setSelectedQuote(text);
-    setQuoteText(text.quote);
-    setAuthor(text.author);
-    setCategory(text.category);
+    setFormData({
+      quoteText: text.quote,
+      author:    text.author,
+      category:  text.category
+    });
     setIsEditing(true);
   };
 
   const handleUpdate = () => {      //handles updating a quote with the new values.
-    const updatedQuote = { ...selectedQuote, quote: quoteText, author, category };
+    const updatedQuote = { ...selectedQuote, quote: formData.quoteText, author: formData.author, category: formData.category };
     onUpdate(selectedQuote, updatedQuote); //update the q..
     setSelectedQuote(updatedQuote); //updates selectedQuote in state..
     setIsEditing(false);
+  };
+
+  const handleChange = (e) => {    //handles changes in fields..
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
   };
 
   return (
@@ -78,38 +92,41 @@ const EditForm = ({ onUpdate }) => {
         )}
 
         {selectedQuote && isEditing && ( //isEditing is true, it means user is currently editin' a q..
-          <>
-            <div>
-              <label>Quote Text:</label>
-              <input
-                type="text"
-                value={quoteText}
-                onChange={(e) => setQuoteText(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label>Author:</label>
-              <input
-                type="text"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label>Category:</label>
-              <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                required
-              />
-            </div>
-            <button onClick={handleUpdate}>Update</button>
-          </>
-        )}
-      </form>
+        <>
+        <div>
+          <label>Quote Text:</label>
+          <input
+            type="text"
+            name="quoteText"
+            value={formData.quoteText}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Author:</label>
+          <input
+            type="text"
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Category:</label>
+          <input
+            type="text"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button onClick={handleUpdate}>Update</button>
+      </>
+    )}
+  </form>
       
       {/* display the updated q.. */}
       {selectedQuote && !isEditing && (  // isEditing is false, it means user is nt currently editin' a q..
