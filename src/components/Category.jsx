@@ -62,9 +62,21 @@ const Categories = () => {
     }
     return stars;  
   };
+
+  const handleLoad = () => {
+    fetch('../../data/localStorage.json')
+      .then(res => res.json())
+      .then(data => {
+        setQuotes(data.quotes);
+        initializeVotesAndRatings(data.quotes);
+      })
+      .catch(err => console.error('Error loading quotes:', err));
+  };
+
   return (
     <div>
       <h3>List of Quotes - {category}~</h3>
+      <button onClick={handleLoad}>Load</button>
       {/* Map over the filtered quotes nd display each quote */}
         {quotes.map((text, index) => (
           <blockquote key={index}>

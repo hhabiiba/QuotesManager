@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const AddForm = ({ onAdd }) => {  
   const [formData, setFormData] = useState({ //Input fields..
-    addQuote: '',  
+    quote: '',  
     author: '',   
     category: ''   
   });   
@@ -16,7 +16,7 @@ const AddForm = ({ onAdd }) => {
     setNewQuote(newQuote);
     //clear the fields after sub..
     setFormData({
-      addQuote: '',
+      quote: '',
       author: '',
       category: ''
     });
@@ -55,8 +55,8 @@ const AddForm = ({ onAdd }) => {
           <label>Quote:</label>
           <input
             type="text"
-            value={formData.addQuote}
-            onChange={(e) => setFormData({ ...formData, addQuote: e.target.value })}
+            value={formData.quote}
+            onChange={(e) => setFormData({ ...formData, quote: e.target.value })}
             required
           />
         </div>
@@ -86,7 +86,7 @@ const AddForm = ({ onAdd }) => {
       {newQuote && (
         <div>
           <blockquote>
-            <p><strong>Quote: </strong><q>{newQuote.addQuote}</q></p>
+            <p><strong>Quote: </strong><q>{newQuote.quote}</q></p>
             <p><strong>Author: </strong>{newQuote.author}</p>
             <p><strong>Category: </strong>{newQuote.category}</p>
           </blockquote>
