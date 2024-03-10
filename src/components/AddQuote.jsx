@@ -9,6 +9,7 @@ const AddForm = ({ onAdd }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newQuote = { addQuote, author, category };// a new quote obj usin' the input values..
+    console.log('Added content:', newQuote);
     onAdd(newQuote); // ()onAdd func. passed from the parent comp. nd pass the new quote..
     setNewQuote(newQuote); 
     //clear the fields after sub..

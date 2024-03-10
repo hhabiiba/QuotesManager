@@ -39,6 +39,7 @@ const EditForm = ({ onUpdate }) => {
 
   const handleUpdate = () => {      //handles updating a quote with the new values.
     const updatedQuote = { ...selectedQuote, quote: formData.quoteText, author: formData.author, category: formData.category };
+    console.log('Updated content: ', updatedQuote);
     onUpdate(selectedQuote, updatedQuote); //update the q..
     setSelectedQuote(updatedQuote); //updates selectedQuote in state..
     setIsEditing(false);

@@ -3,12 +3,10 @@ import  AddQuote from './AddQuote';
 import  EditQuote from './EditQuote'
 
 const AddEditPage = () => {
-    const handleAdd = (newQuote) => { //func. for addin' newQuotes..
-        console.log ('adding quote', newQuote)
+    const handleAdd = () => { //func. for addin' newQuotes..
       }
     
-      const handleUpdate = (updatedQuote) => { //func. for updatin' q..
-        console.log('updated quote:', updatedQuote);
+      const handleUpdate = () => { //func. for updatin' q..   
       };
 
   return (
