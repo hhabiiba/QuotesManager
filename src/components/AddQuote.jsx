@@ -1,21 +1,50 @@
 import React, { useState } from 'react';
 
-const AddForm = ({ onAdd }) => { 
-  const [addQuote, setAddQuote] = useState('');   //  Quote text input..
-  const [author, setAuthor] = useState('');       //  Author input..
-  const [category, setCategory] = useState('');   //  Category input..
+const AddForm = ({ onAdd }) => {  
+  const [formData, setFormData] = useState({ //Input fields..
+    addQuote: '',  
+    author: '',   
+    category: ''   
+  });   
   const [newQuote, setNewQuote] = useState(null); //  State to hold newly added quote fields..
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newQuote = { addQuote, author, category };// a new quote obj usin' the input values..
+    const newQuote = { ...formData };// a new quote obj usin' the input values..
     console.log('Added content:', newQuote);
     onAdd(newQuote); // ()onAdd func. passed from the parent comp. nd pass the new quote..
-    setNewQuote(newQuote); 
+    setNewQuote(newQuote);
     //clear the fields after sub..
-    setAddQuote('');
-    setAuthor('');
-    setCategory('');
+    setFormData({
+      addQuote: '',
+      author: '',
+      category: ''
+    });
+  };
+  
+  const handleSaveToJSON = () => { //handle to save quotes to JSON file..
+    const existingQuotes = JSON.parse(localStorage.getItem('quotes')) || []; //Retrieve existin' quotes from localStorage || initialize as an empty arr..
+    console.log('Existing quotes from localStorage:', existingQuotes); 
+
+    const newQuote = { ...formData };                       //To create a newQuote obj. entered by the user..
+    console.log('Newly added quote:', newQuote); 
+  
+    const allQuotes = [...existingQuotes, newQuote];                   //Merge existin' quotes wid the newly added quote..
+    console.log('All quotes to be saved:', allQuotes); 
+  
+    localStorage.setItem('quotes', JSON.stringify(allQuotes));      //Save all quotes bk to localStorage..
+    const jsonData = { quotes: allQuotes };                        //Prepare/Save JSON data wid quotes arr..
+    const jsonDataString = JSON.stringify(jsonData);       
+    const blob = new Blob([jsonDataString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');                     //Link element to trigger the download..
+    a.href = url;
+    a.download = 'localStorage.json';
+    //Append  link to the DOM, trigger the download, nd clean up..
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -26,8 +55,8 @@ const AddForm = ({ onAdd }) => {
           <label>Quote:</label>
           <input
             type="text"
-            value={addQuote}
-            onChange={(e) => setAddQuote(e.target.value)}
+            value={formData.addQuote}
+            onChange={(e) => setFormData({ ...formData, addQuote: e.target.value })}
             required
           />
         </div>
@@ -35,8 +64,8 @@ const AddForm = ({ onAdd }) => {
           <label>Author:</label>
           <input
             type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            value={formData.author}
+            onChange={(e) => setFormData({ ...formData, author: e.target.value })}
             required
           />
         </div>
@@ -44,12 +73,13 @@ const AddForm = ({ onAdd }) => {
           <label>Category:</label>
           <input
             type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={formData.category}
+            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
             required
           />
         </div>
         <button type="submit">Add</button>
+        <button type="button" onClick={handleSaveToJSON}>Save</button>
       </form>
 
       {/* to display the newly added quote */}
