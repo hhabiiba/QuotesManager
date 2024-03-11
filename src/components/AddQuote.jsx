@@ -1,28 +1,23 @@
-import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { addQuote,  addFormData, setNewQuote } from '../actions/addAction';
 
-const AddForm = ({ onAdd }) => {  
-  const [formData, setFormData] = useState({ //Input fields..
-    quote: '',  
-    author: '',   
-    category: ''   
-  });   
-  const [newQuote, setNewQuote] = useState(null); //  State to hold newly added quote fields..
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newQuote = { ...formData };// a new quote obj usin' the input values..
-    console.log('Added content:', newQuote);
-    onAdd(newQuote); // ()onAdd func. passed from the parent comp. nd pass the new quote..
-    setNewQuote(newQuote);
-    //clear the fields after sub..
-    setFormData({
-      quote: '',
-      author: '',
-      category: ''
-    });
-  };
+const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote }) => {
   
-  const handleSaveToJSON = () => { //handle to save quotes to JSON file..
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newQuoteData = { ...formData };
+    onAddQuote(newQuoteData);
+    onAddFormData({ quote: '', author: '', category: '' });
+    onSetNewQuote(newQuoteData); 
+    console.log(newQuoteData)
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    onAddFormData({ [name]: value }); 
+  };  
+
+  const handleSaveToJSON = () => {
     const existingQuotes = JSON.parse(localStorage.getItem('quotes')) || []; //Retrieve existin' quotes from localStorage || initialize as an empty arr..
     console.log('Existing quotes from localStorage:', existingQuotes); 
 
@@ -51,33 +46,33 @@ const AddForm = ({ onAdd }) => {
     <div>
       <h3>Add Quote</h3>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Quote:</label>
-          <input
-            type="text"
-            value={formData.quote}
-            onChange={(e) => setFormData({ ...formData, quote: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label>Author:</label>
-          <input
-            type="text"
-            value={formData.author}
-            onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label>Category:</label>
-          <input
-            type="text"
-            value={formData.category}
-            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-            required
-          />
-        </div>
+        <label>Quote:</label>
+        <input
+          type="text"
+          name="quote"
+          value={formData.quote}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label>Author:</label>
+        <input
+          type="text"
+          name="author"
+          value={formData.author}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label>Category:</label>
+        <input
+          type="text"
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        />
+        <br />
         <button type="submit">Add</button>
         <button type="button" onClick={handleSaveToJSON}>Save</button>
       </form>
@@ -96,4 +91,16 @@ const AddForm = ({ onAdd }) => {
   );
 };
 
-export default AddForm;
+const mapStateToProps = (state) => ({
+  //newQuote, formData from Redux store..
+  formData: state.test.formData,
+  newQuote: state.test.newQuote, 
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddQuote: (quotes) => dispatch(addQuote(quotes)), 
+  onAddFormData: (formData) => dispatch(addFormData(formData)), 
+  onSetNewQuote: (newQuote) => dispatch(setNewQuote(newQuote)), 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm)
