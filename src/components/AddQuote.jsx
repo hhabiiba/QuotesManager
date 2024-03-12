@@ -93,8 +93,8 @@ const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote
 
 const mapStateToProps = (state) => ({
   //newQuote, formData from Redux store..
-  formData: state.test.formData,
-  newQuote: state.test.newQuote, 
+  formData: state.add.formData,
+  newQuote: state.add.newQuote, 
 });
 
 const mapDispatchToProps = (dispatch) => ({

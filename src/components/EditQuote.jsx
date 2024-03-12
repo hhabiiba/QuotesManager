@@ -1,25 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState , useEffect }from 'react';
+import { connect } from 'react-redux';
+import { setSelectedCategory, setQuotesForSelectedCategory, setSelectedQuote, setFormData } from '../actions/editAction';
 import quotesData from '../../data/quotesList.json';
 
-const EditForm = ({ onUpdate }) => {
-  const [selectedCategory, setSelectedCategory] = useState('');  //keeps track of the category selected by the user..
-  const [quotesForSelectedCategory, setQuotesForSelectedCategory] = useState([]);  //stores an arr. of quotes tht belong to the currently selected category..
-  const [selectedQuote, setSelectedQuote] = useState(null);   //stores the quote currently being edited..
-  const [formData, setFormData] = useState({                 //stores the quoteText, author, category of the q..
-    quoteText: '',
-    author: '',
-    category: ''
-  });            
+const EditForm = ({ selectedCategory, quotesForSelectedCategory,  selectedQuote, formData, setSelectedCategory, setQuotesForSelectedCategory, setSelectedQuote, setFormData }) => {
   const [isEditing, setIsEditing] = useState(false);      //tracks whether a quote is being edited..
-
-  useEffect(() => {
-    setFormData({
-      quoteText:'',
-      author: '',
-      category:''
-    });
-    setIsEditing(false);
-  }, [selectedCategory]);
 
   const handleCategoryDisplay= (e) => {       //handles the change in the selected category from the dropdown..
     const category = e.target.value;
@@ -40,8 +25,7 @@ const EditForm = ({ onUpdate }) => {
   const handleUpdate = () => {      //handles updating a quote with the new values.
     const updatedQuote = { ...selectedQuote, quote: formData.quoteText, author: formData.author, category: formData.category };
     console.log('Updated content: ', updatedQuote);
-    onUpdate(selectedQuote, updatedQuote); //update the q..
-    setSelectedQuote(updatedQuote); //updates selectedQuote in state..
+    setSelectedQuote(updatedQuote); //updates selectedQuote in store..
     setIsEditing(false);
   };
 
@@ -52,6 +36,15 @@ const EditForm = ({ onUpdate }) => {
       [name]: value
     });
   };
+  
+  useEffect(() => {
+    setFormData({
+      quoteText:'',
+      author: '',
+      category:''
+    });
+    setIsEditing(false);
+  }, [selectedCategory]);
 
   return (
     <div>
@@ -142,4 +135,18 @@ const EditForm = ({ onUpdate }) => {
   );
 };
 
-export default EditForm;
+const mapStateToProps = (state) => ({
+  selectedCategory: state.edit.selectedCategory,
+  quotesForSelectedCategory: state.edit.quotesForSelectedCategory, 
+  selectedQuote: state.edit.selectedQuote,
+  formData: state.edit.formData
+});
+
+const mapDispatchToProps = {
+  setSelectedCategory,
+  setQuotesForSelectedCategory,
+  setSelectedQuote,
+  setFormData
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

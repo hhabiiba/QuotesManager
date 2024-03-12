@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import addReducer from './reducers/addReducer';
+import editReducer from './reducers/editReducer'; 
 
 const store = configureStore({
   reducer: {
-    test: addReducer 
+    add: addReducer,
+    edit: editReducer 
   }
 });
 
