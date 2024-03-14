@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import quotesData from '../../data/quotesList.json';
+import { setQuotes } from '../actions/categoryAction';
 
-const Categories = () => {
+const Categories = ({quotes, setQuotes}) => {
   const { category } = useParams();// extractin' the category parameter from the URL (/:category)..
-  const [quotes, setQuotes] = useState([]); // holds the filtered quotes based on the selected category..
   const [votes, setVotes] = useState({}); //store the votin' counts..
   const [ratings, setRatings] = useState({});//ratings for each quote..
   
@@ -86,8 +87,8 @@ const Categories = () => {
             <button onClick={() => handleDeleteQuote(text)}>&#10060;</button>
             <br />
             <div>
-              <button onClick={() => handleVote(text, 'thumbsUp')}>👍 {votes[text.quote].thumbsUp}</button>
-              <button onClick={() => handleVote(text, 'thumbsDown')}>👎 {votes[text.quote].thumbsDown}</button>
+              <button onClick={() => handleVote(text, 'thumbsUp')}>👍 {votes[text.quote]?.thumbsUp}</button>
+              <button onClick={() => handleVote(text, 'thumbsDown')}>👎 {votes[text.quote]?.thumbsDown}</button>
             </div> 
             <br />
             <div>
@@ -99,5 +100,12 @@ const Categories = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  quotes: state.category.quotes
+});
 
-export default Categories;
+const mapDispatchToProps = {
+  setQuotes
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
