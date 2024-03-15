@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import About from './components/About';
 import Contact from './components/Contact';
+import Sidebar from './components/SideBar';
 
 const App = () => {
   
@@ -19,6 +20,7 @@ const App = () => {
     <Router>
     <Header/>
     <NavBar/>
+    <Sidebar />
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category/:category" element={<Category />} />
