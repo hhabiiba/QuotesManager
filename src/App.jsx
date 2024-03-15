@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
 } from 'react-router-dom'
 import Home from './components/Home'
 import Category from './components/Category';
@@ -11,7 +10,7 @@ import AddEditPage from './components/AddEdit';
 import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-
+import About from './components/About';
 const App = () => {
   
   return (
@@ -22,6 +21,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/category/:category" element={<Category />} />
         <Route path="/AddEdit" element={<AddEditPage />} />
+        <Route path="/About" element={<About />} />
     </Routes>
     <Footer/>
     </Router>
