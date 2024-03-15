@@ -11,6 +11,8 @@ import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import About from './components/About';
+import Contact from './components/Contact';
+
 const App = () => {
   
   return (
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/category/:category" element={<Category />} />
         <Route path="/AddEdit" element={<AddEditPage />} />
         <Route path="/About" element={<About />} />
+        <Route path="/Contact" element={<Contact />} />
     </Routes>
     <Footer/>
     </Router>
