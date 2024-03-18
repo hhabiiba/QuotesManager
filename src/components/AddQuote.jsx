@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { addQuote,  addFormData, setNewQuote } from '../actions/addAction';
+import '../CSS/addquote.css';
 
 const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote }) => {
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newQuoteData = { ...formData };
@@ -43,43 +44,48 @@ const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote
   };
 
   return (
-    <div>
+    <div className="add-form-container">
       <h3>Add Quote</h3>
       <form onSubmit={handleSubmit}>
-        <label>Quote:</label>
-        <input
-          type="text"
-          name="quote"
-          value={formData.quote}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <label>Author:</label>
-        <input
-          type="text"
-          name="author"
-          value={formData.author}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <label>Category:</label>
-        <input
-          type="text"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <button type="submit">Add</button>
-        <button type="button" onClick={handleSaveToJSON}>Save</button>
+        <div className="form-group">
+          <label>Quote:</label>
+          <input
+            type="text"
+            name="quote"
+            value={formData.quote}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Author:</label>
+          <input
+            type="text"
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Category:</label>
+          <input
+            type="text"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-actions">
+          <button type="submit" className='add'>Add</button>
+          <button type="button" onClick={handleSaveToJSON} className='save'>Save</button>
+        </div>
       </form>
 
       {/* to display the newly added quote */}
       {newQuote && (
-        <div>
+        <div className="new-quote-container">
           <blockquote>
             <p><strong>Quote: </strong><q>{newQuote.quote}</q></p>
             <p><strong>Author: </strong>{newQuote.author}</p>

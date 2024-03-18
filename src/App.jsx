@@ -13,23 +13,30 @@ import Footer from './components/Footer';
 import About from './components/About';
 import Contact from './components/Contact';
 import Sidebar from './components/SideBar';
+ 
 
 const App = () => {
   
   return (
+    <div className='app'>
     <Router>
-    <Header/>
-    <NavBar/>
-    <Sidebar />
-    <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/category/:category" element={<Category />} />
-        <Route path="/AddEdit" element={<AddEditPage />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Contact" element={<Contact />} />
-    </Routes>
-    <Footer/>
+      <Header />
+      <NavBar />
+      <div className="container">
+        <Sidebar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/category/:category" element={<Category />} />
+            <Route path="/AddEdit" element={<AddEditPage />} />
+            <Route path="/About" element={<About />} />
+            <Route path="/Contact" element={<Contact />} />
+          </Routes>
+        </div>
+      </div>
+      <Footer />
     </Router>
+    </div>
   );
 }
 

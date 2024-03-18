@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import quotesData from '../../data/quotesList.json';
+import '../CSS/home.css';
 
 const Home = () => {
   const [quoteOfTheDay, setQuoteOfTheDay] = useState(null);// to hold quote of the day..
@@ -18,16 +19,19 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className='home'>
+      <div className='quote'>
       <h3>Quote of the Day</h3>
       {quoteOfTheDay && ( // check if quoteOfTheDay is nt null..
         <div>
-          <blockquote>{quoteOfTheDay.quote}</blockquote>
+          <q>{quoteOfTheDay.quote}</q>
           <p>- {quoteOfTheDay.author}</p>
           <button onClick={shareOnTwitter}>Share on Twitter</button>
         </div>
       )}
-      <h3>Categories</h3>
+      </div>
+      <div className="category">
+      <h3>Categories:</h3>
       <ul>
         <li>
           <Link to="/category/Inspirational">Inspirational</Link>
@@ -57,6 +61,7 @@ const Home = () => {
           <Link to="/category/Other">Other</Link>
         </li>
       </ul>
+     </div>
     </div>
   );
 }

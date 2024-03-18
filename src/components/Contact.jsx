@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { submitContactForm } from '../actions/contactAction';
+import { Link } from 'react-router-dom';
+import '../CSS/contact.css';
 
 const Contact = ({ formData, submitContactForm }) => {
     
@@ -16,11 +18,12 @@ const Contact = ({ formData, submitContactForm }) => {
   };
 
   return (
-    <div>
-      <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
+    <div className="contact-container">
+      <Link to="/" className="back-con"></Link> 
+      <h2 className="contact-heading">Contact Us</h2>
+      <form onSubmit={handleSubmit} className="contact-form">
+        <div className="contact-group">
+          <label htmlFor="name" className="contact-label">Name:</label>
           <input
             type="text"
             id="name"
@@ -28,10 +31,11 @@ const Contact = ({ formData, submitContactForm }) => {
             value={formData.name}
             onChange={handleChange}
             required
+            className="contact-input"
           />
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className="contact-group">
+          <label htmlFor="email" className="contact-label">Email:</label>
           <input
             type="email"
             id="email"
@@ -39,19 +43,21 @@ const Contact = ({ formData, submitContactForm }) => {
             value={formData.email}
             onChange={handleChange}
             required
+            className="contact-input"
           />
         </div>
-        <div>
-          <label htmlFor="message">Message:</label>
+        <div className="contact-group">
+          <label htmlFor="message" className="contact-label">Message:</label>
           <textarea
             id="message"
             name="message"
             value={formData.message}
             onChange={handleChange}
             required
+            className="contact-input"
           ></textarea>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="submit-button">Submit</button>
       </form>
     </div>
   );

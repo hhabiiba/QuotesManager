@@ -1,0 +1,26 @@
+.navbar {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: linear-gradient(to right, #616161, #ffffff);
+    border: 2px solid black;
+    padding: 0.3rem;
+    border-style: groove;
+    width: 50%;
+    margin-left: 360px;
+  }
+  .navbar-list {
+    list-style: none;
+    display: flex;
+    justify-content: center; 
+  }
+  .navbar-item {
+    margin-right: 3.2rem; 
+  }
+  .navbar-link img {
+    width: 30px;
+    transition: transform 0.2s ease-in-out; 
+  }
+  .navbar-link img:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); 
+  }

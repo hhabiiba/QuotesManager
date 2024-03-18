@@ -1,0 +1,116 @@
+.edit-container {
+    max-width: 680px;
+    margin-top: 80px;
+    margin-left: 109px;
+    margin-bottom: 100px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center; 
+  }
+  .edit-container h3 {
+    margin-top: 20px;
+  }
+  .select-category {
+    margin-left: 110px; 
+    width: 20%;
+    position: relative;
+    bottom: 25px;
+  }  
+  .select-category select {
+    padding: 8px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    font-family: monospace;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .select-category:hover{
+    background-color: #0000006d; 
+    color: #fff;
+    
+  }
+  .select-category:hover select {
+    border-color: #000000; 
+    box-shadow: 0 0 10px rgba(155, 155, 155, 0.7);
+  }
+  
+  .quotes-list {
+    margin-top: 20px;
+    line-height: 1.5pc;
+  }
+  .quotes-list h4 {
+    margin-bottom: 20px;
+    font-size: large;
+  }
+  
+  .quotes-list ul {
+    list-style: none;
+    padding: 5px;
+  }
+  
+  .quotes-list li {
+    margin-bottom: 30px;
+  }
+  
+  .quotes-list button {
+    padding: 5px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 30px;
+    margin-left: 40px;
+  }
+  
+  .quotes-list button:hover {
+    background-color: #ffea00;
+  }
+  
+  .quote-form {
+    margin-top: 20px;
+  }
+  
+  .quote-form label {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  
+  .quote-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  
+  .quote-form input:hover {
+    border-color: #007bff;
+  }
+  
+  .quote-form button {
+    padding: 10px 20px;
+    background-color: #006bde;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  .quote-form button:hover {
+    background-color: #419dff;
+  }
+  
+  .updated-quote {
+    margin-top: 20px;
+    line-height: 2pc;
+    background-color: #eeeeee;
+    padding: 10px;
+  }
+  
+  .updated-quote blockquote {
+    margin-bottom: 10px;
+  }
+ 

@@ -10,3 +10,18 @@ svg {
   display: block;
   max-width: 100%;
 }
+/* parent */
+.container {
+  display: flex;
+  align-items: flex-start; 
+  padding-bottom: 15px;
+}
+.content {
+  flex-grow: 1; 
+  padding-bottom: 50px;
+}
+.app{
+  background-image: url('./assets/background.jpg');
+  background-size: cover;
+}
+ 

@@ -1,0 +1,65 @@
+.footer {
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background-image: linear-gradient(to top, #616161, #ffffff);
+    border: 2px solid #000000;
+  }
+  .footer-text {
+    display: flex;
+    flex-direction: row;
+    margin-left:140px;
+    color: #000000;
+    font-size: 18px;
+  }
+  .rights {
+    margin-left: 20px;
+  }
+  .rights p {
+    margin: 7px;
+    color: #000000;
+  }
+  .team-link {
+    margin-right: 20px;
+  }
+  .footer-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    margin-left: 10px;
+    box-shadow:0 0 10px #ffffff;
+  }
+  .social-media {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .social-link {
+    margin-bottom: 1px;
+  }
+  .social-icon {
+    width: 26px;
+    margin-right: 20px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    transition: transform 0.4s ease-in-out; 
+  }
+  .social-icon:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 10px 10px rgba(255, 255, 255, 0.8)); 
+  }
+  .explore {
+    text-align: center;
+    margin-right: 130px;
+    margin-left: auto;
+    font-size: 14px;
+    padding: 10px;
+    color: #000000;
+  }
+  
