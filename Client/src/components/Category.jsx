@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import quotesData from '../../data/quotesList.json';
 import { setQuotes } from '../actions/categoryAction';
 import '../CSS/category.css'
@@ -83,6 +83,7 @@ const Categories = ({quotes, setQuotes}) => {
 
   return (
     <div className='categories-container'>
+      <Link to="/" className="back-cat"></Link>
       <h3 className='category-heading'>List of Quotes - {category}~</h3>
       <button className='load' onClick={handleLoad}>Load</button>
       {/* Map over the filtered quotes nd display each quote */}
