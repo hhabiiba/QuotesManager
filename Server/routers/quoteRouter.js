@@ -33,9 +33,13 @@ router.get('/:id', async (req, res) => {
 // Create a new quote
 router.post('/', async (req, res) => {
     try {
-      const quote = new Quote(req.body);
-      await quote.save();
-      res.status(201).json(quote);
+      const { quote, author, category } = req.body;
+      if (!quote || !author || !category) {
+        return res.status(400).json({message: 'Missing required fields'});
+      }
+      const newQuote = new Quote({ quote, author, category});
+      await newQuote.save();
+      res.status(201).json(newQuote);
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
@@ -45,7 +49,11 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedQuote = await Quote.findByIdAndUpdate(id, req.body, { new: true });
+    const { quote, author, category } = req.body;
+    if (!quote || !author || !category) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+    const updatedQuote = await Quote.findByIdAndUpdate(id, { quote, author, category },{ new: true });
     if (!updatedQuote) {
       return res.status(404).json({ message: 'Quote not found' });
     }
