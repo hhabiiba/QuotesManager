@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 
 loginRouter.get('/receive', async (req, res) => {
+    console.log("Received request to test endpoint for loginRouter");
     res.json({
       message: "Endpoint test for loginRouter"
     });

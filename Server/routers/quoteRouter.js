@@ -3,6 +3,7 @@ const router = express.Router();
 const Quote = require('../models/quoteModel');
 
 router.get('/receive', async (req, res) => {
+    console.log("Received request to test endpoint for router");
     res.json({
       message: "Endpoint test for router"
     })
@@ -10,6 +11,7 @@ router.get('/receive', async (req, res) => {
 // Get all quotes
 router.get('/', async (req, res) => {
   try {
+    console.log("Received request to get all quotes");
     const quotes = await Quote.find();
     res.json(quotes);
   } catch (err) {
@@ -20,6 +22,7 @@ router.get('/', async (req, res) => {
 // Get a single quote by ID
 router.get('/:id', async (req, res) => {
   try {
+    console.log("Received request to get a single quote by ID:", req.params.id);
     const quote = await Quote.findById(req.params.id);
     if (!quote) {
       return res.status(404).json({ message: 'Quote not found' });
@@ -33,6 +36,7 @@ router.get('/:id', async (req, res) => {
 // Create a new quote
 router.post('/', async (req, res) => {
     try {
+      console.log("Received request to create a new quote:", req.body);
       const { quote, author, category } = req.body;
       if (!quote || !author || !category) {
         return res.status(400).json({message: 'Missing required fields'});
@@ -48,6 +52,7 @@ router.post('/', async (req, res) => {
 // Update a quote by ID
 router.put('/:id', async (req, res) => {
   try {
+    console.log("Received request to update a quote by ID:", req.params.id, req.body);
     const { id } = req.params;
     const { quote, author, category } = req.body;
     if (!quote || !author || !category) {
@@ -66,6 +71,7 @@ router.put('/:id', async (req, res) => {
 // Delete a quote by ID
 router.delete('/:id', async (req, res) => {
   try {
+    console.log("Received request to delete a quote by ID:", req.params.id);
     const { id } = req.params;
     const deletedQuote = await Quote.findByIdAndDelete(id);
     if (!deletedQuote) {
