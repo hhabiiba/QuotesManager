@@ -12,8 +12,8 @@ POST http://localhost:4000/api/users
 Content-Type: application/json
 
 {
-    "username": "Test",
-    "password": "xyZ"
+    "username": "Habiba",
+    "password": "xYz2003"
 }
 
 ### UPDATE by ID
