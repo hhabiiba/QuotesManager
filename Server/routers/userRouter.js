@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 
 userRouter.get('/receive', async (req, res) => {
+    console.log("Received request to test endpoint for userRouter");
     res.json({
       message: "Endpoint test for userRouter"
     });
@@ -12,6 +13,7 @@ userRouter.get('/receive', async (req, res) => {
 // GET all users
 userRouter.get('/', async (req, res) => {
     try {
+      console.log("Received request to get all users");
       const users = await User.find({});
       res.status(200).json(users);
     } catch (err) {
@@ -23,6 +25,7 @@ userRouter.get('/', async (req, res) => {
 // GET user by ID
 userRouter.get('/:id', async (req, res) => {
     try {
+      console.log("Received request to get user by ID:", req.params.id);
       const user = await User.findById(req.params.id);
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
@@ -37,6 +40,7 @@ userRouter.get('/:id', async (req, res) => {
 // Create a new user
 userRouter.post('/', async (req, res) => {
     try {
+      console.log("Received request to create a new user:", req.body);
       const { username, password } = req.body;
       console.log(req.body);
       if (!username || !password) {
@@ -63,6 +67,7 @@ userRouter.post('/', async (req, res) => {
 // Update user by ID
 userRouter.put('/:id', async (req, res) => {
     try {
+      console.log("Received request to update user by ID:", req.params.id, req.body);
       const { id } = req.params;
       const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
       if (!updatedUser) {
@@ -78,6 +83,7 @@ userRouter.put('/:id', async (req, res) => {
 // DELETE user by ID
 userRouter.delete('/:id', async (req, res) => {
     try {
+      console.log("Received request to delete user by ID:", req.params.id);
       const { id } = req.params;
       const deletedUser = await User.findByIdAndDelete(id);
       if (!deletedUser) {

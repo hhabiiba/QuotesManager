@@ -1,3 +1,6 @@
+### testing unknown endpoint
+GET http://localhost:4000/api/nonexistent
+
 ### testing router
 GET http://localhost:4000/api/quotes/receive
 
@@ -12,13 +15,13 @@ POST http://localhost:4000/api/quotes
 Content-Type: application/json
 
 {
-  "quote": "The closer the bond, the deeper the ow!",
-  "author": "- Habiba",
-  "category": "Other"
+  "quote": "Coding in Color",
+  "author": "- T.A.Y",
+  "category": "Coders"
 }
 
 ### UPDATE by ID
-PUT http://localhost:4000/api/quotes/65fa9396f13ba146cd767697
+PUT http://localhost:4000/api/quotes/65fb033df93e1f63b67f8142
 Content-Type: application/json
 
 {
@@ -28,4 +31,4 @@ Content-Type: application/json
 }
 
 ### DELETE by ID
-DELETE http://localhost:4000/api/quotes/65fa9396f13ba146cd767697
+DELETE http://localhost:4000/api/quotes/65fb033df93e1f63b67f8142
