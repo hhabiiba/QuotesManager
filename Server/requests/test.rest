@@ -1,0 +1,31 @@
+### testing router
+GET http://localhost:4000/api/quotes/receive
+
+### GET all
+GET http://localhost:4000/api/quotes
+
+### GET by ID
+GET http://localhost:4000/api/quotes/65faa1d0044a892e9fba88c6
+
+### Create
+POST http://localhost:4000/api/quotes
+Content-Type: application/json
+
+{
+  "quote": "The closer the bond, the deeper the ow!",
+  "author": "- Habiba",
+  "category": "Other"
+}
+
+### UPDATE by ID
+PUT http://localhost:4000/api/quotes/65fa9396f13ba146cd767697
+Content-Type: application/json
+
+{
+  "quote": "Testing PUT request on PORT 4000",
+  "author": "Updated author",
+  "category": "Updated category"
+}
+
+### DELETE by ID
+DELETE http://localhost:4000/api/quotes/65fa9396f13ba146cd767697
