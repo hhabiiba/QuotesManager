@@ -1,17 +1,29 @@
+require('dotenv').config();
+
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
-const config = require('./config/database');
+const app = express(); 
+const quoteRouter = require('./routers/quoteRouter');
 
-const app = express();
+// Middleware
+app.use(cors()); 
+app.use(express.json());
 
-mongoose
-  .connect(config.mongoURL, {
-  })
-  .then(() => console.log('MongoDB connected successfully..'))
-  .catch(err => console.error('Failed! connecting to database', err));
+// Routes
+app.use('/api/quotes', quoteRouter);
 
+// MongoDB connection..
+const dbURL = process.env.mongoDB_URL;
+mongoose.connect(dbURL);
+const db = mongoose.connection;
+db.on('error', (err) => console.err('Failed! connecting to database', err));
+db.once('open', () => {
+    console.log('MongoDB connected successfully..');
+});
+
+// Start server
 const PORT = process.env.PORT || 4000;
-
 app.listen(PORT, () => {
-  console.log(`Server is running on port- ${PORT}`);
+  console.log(`Server running on PORT: ${PORT}`);
 });
