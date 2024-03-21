@@ -1,0 +1,11 @@
+### testing loginRouter
+GET http://localhost:4000/api/login/receive
+
+### POST login
+POST http://localhost:4000/api/login
+Content-Type: application/json
+
+{
+    "username": "Habiba",
+    "password": "xYz2003"
+}

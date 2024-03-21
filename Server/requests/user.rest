@@ -1,0 +1,29 @@
+### testing userRouter
+GET http://localhost:4000/api/users/receive
+
+### GET all
+GET http://localhost:4000/api/users
+
+### GET by ID
+GET http://localhost:4000/api/users/65fad6ef5fa8d1b66af850ad
+
+### Create
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+    "username": "Habiba",
+    "password": "xYz2003"
+}
+
+### UPDATE by ID
+PUT http://localhost:4000/api/users/65fad6ef5fa8d1b66af850ad
+Content-Type: application/json
+
+{
+    "username": "updated Username",
+    "password": "updated Password"
+}
+
+### DELETE by ID
+DELETE http://localhost:4000/api/users/65fad6ef5fa8d1b66af850ad
