@@ -8,7 +8,7 @@ const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote
     e.preventDefault();
     const newQuoteData = { ...formData };
     onAddQuote(newQuoteData);
-    onAddFormData({ quote: '', author: '', category: '' });
+    onAddFormData({ listName: '' , quote: '', author: '', category: ''}); 
     onSetNewQuote(newQuoteData); 
     console.log(newQuoteData)
   };
@@ -19,34 +19,63 @@ const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote
   };  
 
   const handleSaveToJSON = () => {
-    const existingQuotes = JSON.parse(localStorage.getItem('quotes')) || []; //Retrieve existin' quotes from localStorage || initialize as an empty arr..
-    console.log('Existing quotes from localStorage:', existingQuotes); 
+     // Check if the name of the list is provided
+     if (!formData.category) {
+      alert("Please enter the name of the list.");
+      return;
+    }
 
-    const newQuote = { ...formData };                       //To create a newQuote obj. entered by the user..
-    console.log('Newly added quote:', newQuote); 
-  
-    const allQuotes = [...existingQuotes, newQuote];                   //Merge existin' quotes wid the newly added quote..
-    console.log('All quotes to be saved:', allQuotes); 
-  
-    localStorage.setItem('quotes', JSON.stringify(allQuotes));      //Save all quotes bk to localStorage..
-    const jsonData = { quotes: allQuotes };                        //Prepare/Save JSON data wid quotes arr..
-    const jsonDataString = JSON.stringify(jsonData);       
-    const blob = new Blob([jsonDataString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');                     //Link element to trigger the download..
-    a.href = url;
-    a.download = 'localStorage.json';
-    //Append  link to the DOM, trigger the download, nd clean up..
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const existingCategories = JSON.parse(localStorage.getItem('quotes')) || []; // Retrieve existing categories from localStorage or initialize as an empty array
+    console.log('Existing categories from localStorage:', existingCategories); 
+    const updatedCategories = existingCategories.map(category => {
+      if (category.name === formData.category) {
+        console.log('Updating existing category:', category);
+        return {
+          ...category,
+          quotes: [...category.quotes, formData]
+        };
+      }
+      return category;
+    });
+
+    const isNewCategory = !updatedCategories.some(category => category.name === formData.category);
+
+    if (isNewCategory) {
+      console.log('Adding new category:', formData.category);
+      updatedCategories.push({
+        name: formData.category,
+        quotes: [formData]
+      });
+    }
+    localStorage.setItem('quotes', JSON.stringify(updatedCategories));      //Save all quotes bk to localStorage..
+    console.log('Updated categories in localStorage:', updatedCategories);
+    // const jsonDataString = JSON.stringify(updatedCategories);
+    // const blob = new Blob([jsonDataString], { type: 'application/json' });
+    // const url = URL.createObjectURL(blob);
+    // const a = document.createElement('a');                     //Link element to trigger the download..
+    // a.href = url;
+    // a.download = 'localStorage.json';
+    // //Append  link to the DOM, trigger the download, nd clean up..
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
+    // URL.revokeObjectURL(url);
   };
 
   return (
     <div className="add-form-container">
-      <h3>Add Quote</h3>
+      <h3>Add List of Quotes</h3>
       <form onSubmit={handleSubmit}>
+      <div className="form-group">
+          <label>List Name:</label>
+          <input
+            type="text"
+            name="listName"
+            value={formData.listName}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div className="form-group">
           <label>Quote:</label>
           <input
@@ -87,6 +116,7 @@ const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote
       {newQuote && (
         <div className="new-quote-container">
           <blockquote>
+            <p><strong>List: </strong>{newQuote.listName}</p>
             <p><strong>Quote: </strong><q>{newQuote.quote}</q></p>
             <p><strong>Author: </strong>{newQuote.author}</p>
             <p><strong>Category: </strong>{newQuote.category}</p>
@@ -106,7 +136,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onAddQuote: (quotes) => dispatch(addQuote(quotes)), 
   onAddFormData: (formData) => dispatch(addFormData(formData)), 
-  onSetNewQuote: (newQuote) => dispatch(setNewQuote(newQuote)), 
+  onSetNewQuote: (newQuote) => dispatch(setNewQuote(newQuote)),
+  onResetFormData: () => dispatch(resetFormData()), 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm);

@@ -76,3 +76,19 @@
 .back-cat:hover {
   opacity: 0.9; 
 }
+.delete-category {
+  padding: 8px 13px;
+  border-radius: 23px;
+  background-color: #dc3545;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ffffff;
+  margin-left: 640px;
+  position: relative;
+  bottom: 7px;
+}
+
+.delete-category:hover {
+  background-color: #c82333;
+}

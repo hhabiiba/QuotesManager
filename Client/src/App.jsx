@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import About from './components/About';
 import Contact from './components/Contact';
 import Sidebar from './components/SideBar';
+import QuoteList from './components/QuoteList';
  
 
 const App = () => {
@@ -27,10 +28,11 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/category/:category" element={<Category />} />
+            <Route path="/category/:name" element={<Category />} />
             <Route path="/AddEdit" element={<AddEditPage />} />
             <Route path="/About" element={<About />} />
             <Route path="/Contact" element={<Contact />} />
+            <Route path="/quote-list" element={<QuoteList />} />
           </Routes>
         </div>
       </div>

@@ -7,15 +7,24 @@ const Home = () => {
   const [quoteOfTheDay, setQuoteOfTheDay] = useState(null);// to hold quote of the day..
 
   useEffect(() => { // useEffect hook to run once on component mount..
-    const randomIndex = Math.floor(Math.random() * quotesData.quotes.length);// generate a random index to select a random quote..
-    const randomQuote = quotesData.quotes[randomIndex]; // get a random quote from quotesData usin' the random index
-    setQuoteOfTheDay(randomQuote); // Set the random quote as quote of the day..
+    console.log(quotesData);
+    if (quotesData && quotesData.length > 0) {
+     const randomCategoryIndex = Math.floor(Math.random() * quotesData.length); // Select random cat. from quotesData..
+     const randomCategory = quotesData[randomCategoryIndex];
+     if (randomCategory.quotes && randomCategory.quotes.length > 0) { // Check if selected cat. has quotes..
+       const randomQuoteIndex = Math.floor(Math.random() * randomCategory.quotes.length); // Select random quote from the selected cat.
+       const randomQuote = randomCategory.quotes[randomQuoteIndex];
+       setQuoteOfTheDay(randomQuote);
+    }
+  }
   }, []);
 
   const shareOnTwitter = () => {
+    if (quoteOfTheDay) {
     const text = `${quoteOfTheDay.quote} - ${quoteOfTheDay.author}`;// text for tweet, combinin' the quote nd author..
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;// URL for the tweet, encodin' the text parameter..
     window.open(url, '_blank'); // Open a new window wid the Twitter intent URL..
+    }
   };
 
   return (
@@ -34,31 +43,31 @@ const Home = () => {
       <h3>Categories:</h3>
       <ul>
         <li>
-          <Link to="/category/Inspirational">Inspirational</Link>
+          <Link to="/category/Inspirational Quotes">Inspirational</Link>
         </li>
         <li>
-          <Link to="/category/Motivational">Motivational</Link>
+          <Link to="/category/Motivational Quotes">Motivational</Link>
         </li>
         <li>
-          <Link to="/category/Coders">Coders</Link>
+          <Link to="/category/Coders Quotes">Coders</Link>
         </li>
         <li>
-          <Link to="/category/Love">Love</Link>
+          <Link to="/category/Love Quotes">Love</Link>
         </li>
         <li>
-          <Link to="/category/Friendship">Friendship</Link>
+          <Link to="/category/Friendship Quotes">Friendship</Link>
         </li>
         <li>
-          <Link to="/category/Funny">Funny</Link>
+          <Link to="/category/Funny Quotes">Funny</Link>
         </li>
         <li>
-          <Link to="/category/Islamic">Islamic</Link>
+          <Link to="/category/Islamic Quotes">Islamic</Link>
         </li>
         <li>
-          <Link to="/category/Urdu-Hindi">Urdu/Hindi</Link>
+          <Link to="/category/Urdu-Hindi Quotes">Urdu/Hindi</Link>
         </li>
         <li>
-          <Link to="/category/Other">Other</Link>
+          <Link to="/category/Other Quotes">Other</Link>
         </li>
       </ul>
      </div>
