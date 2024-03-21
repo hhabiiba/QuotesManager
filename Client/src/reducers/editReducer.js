@@ -4,6 +4,7 @@ const initialState = {
     selectedCategory: '',
     selectedQuote: null,
     formData: {
+      listName: '',
       quoteText: '',
       author: '',
       category: '',

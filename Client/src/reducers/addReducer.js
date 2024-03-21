@@ -3,6 +3,7 @@ import { ADD_QUOTE, ADD_FORM_DATA, SET_NEW_QUOTE } from '../actions/addAction';
 const initialState = {
   quotes: [],
   formData: {
+    listName:'',
     quote: '',
     author: '',
     category: ''
