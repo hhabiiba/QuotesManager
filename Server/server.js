@@ -6,6 +6,7 @@ const app = express();
 const { connectDB } = require('./config/mongoDb');
 const middleware = require('./utils/middleware');
 const quoteRouter = require('./routers/quoteRouter');
+const quoteListsRouter = require('./routers/quoteListRouter');
 const userRouter = require('./routers/userRouter');
 const loginRouter = require('./routers/loginRouter');
 
@@ -16,6 +17,7 @@ app.use(middleware.requestLogger);
 
 // Routes
 app.use('/api/quotes', quoteRouter);
+app.use('/api/quoteLists', quoteListsRouter);
 app.use('/api/users', userRouter); 
 app.use('/api/login', loginRouter);
 

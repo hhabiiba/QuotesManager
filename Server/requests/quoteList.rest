@@ -1,0 +1,34 @@
+### testing quoteListRouter
+GET http://localhost:4000/api/quoteLists/receive
+
+### GET all
+GET http://localhost:4000/api/quoteLists
+
+### GET by ID
+GET http://localhost:4000/api/quoteLists/
+
+### Create
+POST http://localhost:4000/api/quoteLists
+Content-Type: application/json
+
+{
+  "name": "Other Quotes",
+  "quotes": [
+    "65faa1d0044a892e9fba88c6"
+  ]
+}
+
+
+### UPDATE by ID
+PUT http://localhost:4000/api/quoteLists/65fcbec89641d7553258a87c
+Content-Type: application/json
+
+{
+  "name": "Coders Quotes",
+  "quotes": [
+    "65fa8b9bc837be17a37d78be"
+  ]
+}
+
+### DELETE by ID
+DELETE http://localhost:4000/api/quoteLists/
