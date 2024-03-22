@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom'; 
+import { storeUser, removeUser } from '../services/browserServices';
+import loginUser from '../services/loginService';
 import '../CSS/login.css'; 
 
 const Login = () => {
@@ -21,14 +22,20 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/api/login', formData);
+      const response = await loginUser(formData);
       if (response.status === 200) {
+        storeUser(response.data);
         navigate('/');
       }
     } catch (error) {
       console.error('Login error:', error);
       setErrMsg('Login failed. Please try again.');
     }
+  };
+
+  const handleLogout = () => {
+    removeUser();
+    navigate('/login');
   };
 
   return (
@@ -61,6 +68,7 @@ const Login = () => {
       {errmsg && ( 
       <p className='toggle'>Don't have an account? <Link to="/signup">SignUp</Link></p>
     )}
+    <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

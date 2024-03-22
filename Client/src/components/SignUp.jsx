@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { storeUser } from '../services/browserServices';
+import { addUser } from '../services/userService';
 import '../CSS/signup.css'; 
 
 const SignUp = () => {
@@ -21,8 +22,9 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/api/users', formData);
+      const res = await addUser(formData);
       if (res.status === 201) {
+        storeUser(res.data); 
         navigate('/login');
       }
     } catch (err) {
