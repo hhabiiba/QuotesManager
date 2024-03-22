@@ -14,6 +14,8 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Sidebar from './components/SideBar';
 import QuoteList from './components/QuoteList';
+import Login from './components/Login'; 
+import Signup from './components/SignUp';
  
 
 const App = () => {
@@ -28,6 +30,8 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} /> 
+            <Route path="/signup" element={<Signup />} />
             <Route path="/category/:name" element={<Category />} />
             <Route path="/AddEdit" element={<AddEditPage />} />
             <Route path="/About" element={<About />} />
