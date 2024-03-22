@@ -8,10 +8,10 @@ GET http://localhost:4000/api/quotes/receive
 GET http://localhost:4000/api/quotes
 
 ### GET by ID
-GET http://localhost:4000/api/quotes/65faa1d0044a892e9fba88c6
+GET http://localhost:4000/api/quotes/
 
 ### Create
-POST http://localhost:4000/api/quotes
+POST http://localhost:4000/api/quotes/65fcbfa39641d7553258a88b
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### UPDATE by ID
-PUT http://localhost:4000/api/quotes/65fb033df93e1f63b67f8142
+PUT http://localhost:4000/api/quotes/65fd41b4b63a4a75dbc2a2f2
 Content-Type: application/json
 
 {
@@ -31,4 +31,4 @@ Content-Type: application/json
 }
 
 ### DELETE by ID
-DELETE http://localhost:4000/api/quotes/65fb033df93e1f63b67f8142
+DELETE http://localhost:4000/api/quotes/65fd4f1886fd478c0dc09382

@@ -10,10 +10,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  quotes: [
+  quoteLists: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Quote',
+      ref: 'QuoteList', 
     },
   ],
 });

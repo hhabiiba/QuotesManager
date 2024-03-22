@@ -8,27 +8,26 @@ GET http://localhost:4000/api/quoteLists
 GET http://localhost:4000/api/quoteLists/
 
 ### Create
-POST http://localhost:4000/api/quoteLists
+POST http://localhost:4000/api/quoteLists/65fad7105fa8d1b66af850b4
 Content-Type: application/json
 
 {
-  "name": "Other Quotes",
-  "quotes": [
-    "65faa1d0044a892e9fba88c6"
-  ]
+  "name": " Test Quotes List"
 }
 
 
 ### UPDATE by ID
-PUT http://localhost:4000/api/quoteLists/65fcbec89641d7553258a87c
+PUT http://localhost:4000/api/quoteLists/65fcbfa39641d7553258a88b
 Content-Type: application/json
 
 {
-  "name": "Coders Quotes",
-  "quotes": [
-    "65fa8b9bc837be17a37d78be"
-  ]
+  "name": " Quotes list"
 }
 
 ### DELETE by ID
-DELETE http://localhost:4000/api/quoteLists/
+DELETE http://localhost:4000/api/quoteLists/65fcf10de4b931b51a942a9a
+Content-Type: application/json
+
+{
+  "userId": "65faea3fe81c81504b1abd82"
+}
