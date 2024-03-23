@@ -1,6 +1,7 @@
 .login-container {
     max-width: 450px;
     margin-top: 53px;
+    margin-bottom: 60px;
     margin-left: 350px;
     padding: 20px;
     border: 1px solid #ccc;
@@ -58,4 +59,40 @@
     margin-top: 20px;
     color: blue;
     font-weight: bold;
+  }
+
+  .back-log{
+    display: inline-block; 
+    background-image: url('../assets/back.png');
+    background-size: cover;
+    width: 45px; 
+    height: 45px;
+    position: relative;
+    bottom: 114px;
+    right: 526px;
+  }
+  
+  .back-log:hover {
+    opacity: 0.9; 
+  }
+  button.logout-btn {
+    margin-top: 30px;
+    padding: 8px 16px;
+    background-color: #f44336; 
+    margin-left: 170px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button.logout-btn:hover {
+    background-color: #d32f2f; 
+  }
+
+  .user-text{
+    margin-top: 50px;
+    padding: 8px 16px;
+    background-color: #6b6b6b42; 
+    color: rgb(0, 0, 0);
   }

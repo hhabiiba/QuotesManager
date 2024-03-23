@@ -23,6 +23,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const res = await addUser(formData);
+      console.log('Registration res',  res)
       if (res.status === 201) {
         storeUser(res.data); 
         navigate('/login');
@@ -35,6 +36,7 @@ const SignUp = () => {
 
   return (
     <div className="signup-container">
+      <Link to="/" className="back-sign"></Link>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div>

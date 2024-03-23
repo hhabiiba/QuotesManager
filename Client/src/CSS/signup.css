@@ -60,3 +60,18 @@
     color: rgb(60, 0, 255);
     font-weight: bold;
   }
+
+  .back-sign{
+    display: inline-block; 
+    background-image: url('../assets/back.png');
+    background-size: cover;
+    width: 45px; 
+    height: 45px;
+    position: relative;
+    bottom: 121px;
+    right: 540px;
+  }
+  
+  .back-sign:hover {
+    opacity: 0.9; 
+  }

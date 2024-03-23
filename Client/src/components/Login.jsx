@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
-import { storeUser, removeUser } from '../services/browserServices';
+import { storeUser, removeUser ,  getUser } from '../services/browserServices';
 import loginUser from '../services/loginService';
 import '../CSS/login.css'; 
 
@@ -10,7 +10,15 @@ const Login = () => {
     password: '',
   });
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const [errmsg, setErrMsg] = useState('');
+
+  useEffect(() => {
+    const loggedInUser = getUser();
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -21,25 +29,38 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting login form...');
     try {
       const response = await loginUser(formData);
-      if (response.status === 200) {
-        storeUser(response.data);
-        navigate('/');
+      console.log('Login response:', response);
+      if (response.username) {
+        console.log('Login successful');
+        storeUser(response);
+        setUser(response); 
+        setFormData({ 
+          username: '',
+          password: '',
+        });
+        setErrMsg('');
+      } else {
+        setErrMsg('Login failed. Please try again.');
       }
     } catch (error) {
       console.error('Login error:', error);
       setErrMsg('Login failed. Please try again.');
     }
   };
+  
 
   const handleLogout = () => {
     removeUser();
+    setUser(null);
     navigate('/login');
   };
 
   return (
     <div className="login-container">
+      <Link to="/" className="back-log"></Link> 
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -64,11 +85,18 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-      <p className="err">{errmsg}</p>
+      {user && (
+        <div>
+          <p  className='user-text'>
+            <strong>{user.username}</strong> is logged in.
+          </p>
+          <button className='logout-btn' onClick={handleLogout}>Logout</button>
+        </div>
+      )}
+      <p className="err">{errmsg}</p>    
       {errmsg && ( 
-      <p className='toggle'>Don't have an account? <Link to="/signup">SignUp</Link></p>
-    )}
-    <button onClick={handleLogout}>Logout</button>
+        <p className='toggle'>Don't have an account? <Link to="/signup">SignUp</Link></p>
+      )}
     </div>
   );
 };
