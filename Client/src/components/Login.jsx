@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
+import { useSelector, useDispatch } from 'react-redux';
 import { storeUser, removeUser ,  getUser } from '../services/browserServices';
+import { setUserData, setQuotesListData } from '../reducers/quotesReducer'
 import loginUser from '../services/loginService';
 import '../CSS/login.css'; 
 
@@ -10,6 +12,7 @@ const Login = () => {
     password: '',
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
   const [errmsg, setErrMsg] = useState('');
 
@@ -32,6 +35,7 @@ const Login = () => {
     console.log('Submitting login form...');
     try {
       const response = await loginUser(formData);
+      dispatch(setUserData(response));
       console.log('Login response:', response);
       if (response.username) {
         console.log('Login successful');

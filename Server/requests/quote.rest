@@ -11,7 +11,7 @@ GET http://localhost:4000/api/quotes
 GET http://localhost:4000/api/quotes/
 
 ### Create
-POST http://localhost:4000/api/quotes/65fcbfa39641d7553258a88b
+POST http://localhost:4000/api/quotes/6601480a78d8a25aea57469f
 Content-Type: application/json
 
 {

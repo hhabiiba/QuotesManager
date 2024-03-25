@@ -30,7 +30,7 @@ userRouter.get('/:id', async (req, res) => {
       console.log("Received request to get user by ID:", req.params.id);
       const user = await User.findById(req.params.id);
       if (!user) {
-        return res.status(404).json({ error: 'User not found' });
+        return res.status(404).json({ error: 'User not found' });                                                           
       }
       res.status(200).json(user);
     } catch (err) {
