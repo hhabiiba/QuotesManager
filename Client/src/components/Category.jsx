@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
-import quotesData from '../../data/quotesList.json';
+import { getAllQuoteLists } from '../services/quoteListService'; // Import the service function
 import { setQuotes } from '../actions/categoryAction';
 import '../CSS/category.css';
 
 const Categories = ({ quotes, setQuotes }) => {
-  const { name } = useParams(); // extracting the name parameter from the URL (/:name)
-  const [votes, setVotes] = useState({}); // store the voting counts
-  const [ratings, setRatings] = useState({}); // ratings for each quote
+  const { name } = useParams();
+  const [votes, setVotes] = useState({});
+  const [ratings, setRatings] = useState({});
 
   useEffect(() => {
-    console.log("Category:", name);
-    const categoryData = quotesData.find((cat) => cat.name === name);
-    console.log("categoryData:", categoryData);
-    if (categoryData) {
-      initializeVotesAndRatings(categoryData.quotes);
-    } else {
-      console.error(`No quotes found for category: ${name}`);
-    }
+    fetchQuoteLists();
   }, [name]);
 
+  const fetchQuoteLists = async () => {
+    try {
+      const quoteLists = await getAllQuoteLists(); // Fetch quote lists from the backend
+      const quotes = quoteLists
+        .find(list => list.name === name)
+        .quotes;
+      initializeVotesAndRatings(quotes);
+      setQuotes(quotes);
+    } catch (error) {
+      console.error('Error fetching quote lists:', error);
+    }
+  };
   const initializeVotesAndRatings = (quotes) => {
     const initialVotes = {};
     const initialRatings = {};

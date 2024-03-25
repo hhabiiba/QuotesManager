@@ -7,7 +7,7 @@
     color: rgb(255, 255, 255);
   }
 .home {
-    background-image: url('https://media.giphy.com/media/UqFw8l15hSH4VKq5wW/giphy.gif');
+    /* background-image: url('https://media.giphy.com/media/UqFw8l15hSH4VKq5wW/giphy.gif'); */
     background-size: cover;
     animation: animateGif 6000s linear infinite; 
     width: 90%;

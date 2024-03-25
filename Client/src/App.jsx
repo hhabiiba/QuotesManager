@@ -1,10 +1,7 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from 'react-router-dom'
-import Home from './components/Home'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Home from './components/Home';
 import Category from './components/Category';
 import AddEditPage from './components/AddEdit';
 import Header from './components/Header';
@@ -14,36 +11,55 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Sidebar from './components/SideBar';
 import QuoteList from './components/QuoteList';
-import Login from './components/Login'; 
+import Login from './components/Login';
 import Signup from './components/SignUp';
- 
+// import { getUsers } from './services/userService';
 
 const App = () => {
-  
+  // const [user, setUserState] = useState(null);
+
+  // const fetchUser = async () => {
+  //   try {
+  //     const users = await getUsers();
+  //     const loggedInUser = users[0];
+  //     setUser(loggedInUser);
+  //     setUserState(loggedInUser);
+  //   } catch (error) {
+  //     console.error('Error fetching user:', error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
+
   return (
-    <div className='app'>
-    <Router>
-      <Header />
-      <NavBar />
-      <div className="container">
-        <Sidebar />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} /> 
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/category/:name" element={<Category />} />
-            <Route path="/AddEdit" element={<AddEditPage />} />
-            <Route path="/About" element={<About />} />
-            <Route path="/Contact" element={<Contact />} />
-            <Route path="/quote-list" element={<QuoteList />} />
-          </Routes>
+    <div className="app">
+      <Router>
+        <Header />
+        <NavBar />
+        <div className="container">
+          <Sidebar />
+          <div className="content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/category/:name" element={<Category />} />
+              <Route path="/AddEdit" element={<AddEditPage />} />
+              <Route path="/About" element={<About />} />
+              <Route path="/Contact" element={<Contact />} />
+              <Route path="/quote-list" element={<QuoteList />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
     </div>
   );
-}
+};
+
+// const mapDispatchToProps = (dispatch) => ({
+//   setUser: (user) => dispatch(setUser(user)),
+// });
 
 export default App
