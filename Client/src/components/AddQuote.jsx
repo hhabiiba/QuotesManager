@@ -1,81 +1,114 @@
-import { connect } from 'react-redux';
-import { addQuote,  addFormData, setNewQuote } from '../actions/addAction';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { addFormData } from '../actions/addAction';
+import { setQuotesListData, deleteList, setUserQuoteList } from '../reducers/quotesReducer';
 import '../CSS/addquote.css';
+import axios from 'axios';
+import { useState, useEffect } from 'react'; // Import useEffect
 
-const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote }) => {
+const AddQuote = ({ formData, onAddFormData }) => {
+  const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('user'));
+  const Quotes = useSelector(state => state.quote.quoteListData);
+  const [listsIds, setListsIds] = useState(user.quoteLists);
+  const [lists, setLists] = useState([]); // State to store list names
+  const [selectedListIndex, setSelectedListIndex] = useState(0); // State to store selected list index
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const fetchListNames = async () => {
+      try {
+        const listsData = [];
+        for (const listId of listsIds) {
+          const response = await axios.get(`http://localhost:4000/api/quoteLists/${listId}`);
+          listsData.push(response.data.name);
+        }
+        setLists(listsData);
+      } catch (error) {
+        console.error('Error fetching list names:', error);
+        setLists([]);
+      }
+    };
+
+    fetchListNames();
+  }, [listsIds]); // Fetch list names when listsIds change
+
+  const handleAddQuote = async (e) => {
     e.preventDefault();
-    const newQuoteData = { ...formData };
-    onAddQuote(newQuoteData);
-    onAddFormData({ listName: '' , quote: '', author: '', category: ''}); 
-    onSetNewQuote(newQuoteData); 
-    console.log(newQuoteData)
+    const listId = listsIds[selectedListIndex];
+    const { quote, author, category } = formData;
+    const newQuote = { quote, author, category };
+  
+    try {
+      const response = await axios.post(`http://localhost:4000/api/quotes/${listId}`, newQuote);
+      const updatedListIndex = lists.findIndex(list => list === lists[selectedListIndex]);
+      const updatedQuotesData = [...Quotes];
+      updatedQuotesData[updatedListIndex] = {
+        ...updatedQuotesData[updatedListIndex],
+        quotes: [...updatedQuotesData[updatedListIndex].quotes, response.data]
+      };
+      dispatch(setQuotesListData(updatedQuotesData));
+      localStorage.setItem('quotesListData', JSON.stringify(updatedQuotesData));
+      alert("Quote added successfully");
+    } catch (error) {
+      console.error('Error adding quote:', error);
+    }
+  };  
+
+  const handleAddList = async (e) => {
+    e.preventDefault();
+    const newListName = formData.listName;
+
+    try {
+      const response = await axios.post(`http://localhost:4000/api/quoteLists/${user.id}`, { name: newListName });
+      const newList = response.data;
+      const updatedListsIds = [...listsIds, newList.id];
+      setListsIds(updatedListsIds);
+      const updatedQuotesData = [...Quotes]
+      updatedQuotesData.push(newList);
+      const updatedUser = {...user};
+      updatedUser.quoteLists = updatedListsIds;
+      dispatch(setQuotesListData(updatedQuotesData));
+      dispatch(setUserQuoteList(updatedListsIds));
+      localStorage.setItem('quotesListData', JSON.stringify(updatedQuotesData));
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      alert("List added success");
+    } catch (error) {
+      console.error('Error adding list:', error);
+    }
   };
+
+  const handleClickDelete = async (e) => {
+    try {
+      const listId = listsIds[selectedListIndex];
+      const updatedQuoteData = Quotes.filter((list, index) => index !== selectedListIndex)
+      dispatch(deleteList(selectedListIndex));
+      const updatedListIds = listsIds.filter((id) => id !== listId);
+      setListsIds(updatedListIds);
+      const updatedUser = {...user};
+      updatedUser.quoteLists = updatedListIds;
+      dispatch(setUserQuoteList(updatedListIds))
+      localStorage.setItem('quotesListData', JSON.stringify(updatedQuoteData));
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      await axios.delete(`http://localhost:4000/api/quoteLists/${listId}`, { data: { userId: user.id } });
+      alert("List deleted success");
+    } catch (error) {
+      console.error('Error deleting list:', error);
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    onAddFormData({ [name]: value }); 
-  };  
+    onAddFormData({ [name]: value });
+  };
 
-  const handleSaveToJSON = () => {
-     // Check if the name of the list is provided
-     if (!formData.category) {
-      alert("Please enter the name of the list.");
-      return;
-    }
-
-    const existingCategories = JSON.parse(localStorage.getItem('quotes')) || []; // Retrieve existing categories from localStorage or initialize as an empty array
-    console.log('Existing categories from localStorage:', existingCategories); 
-    const updatedCategories = existingCategories.map(category => {
-      if (category.name === formData.category) {
-        console.log('Updating existing category:', category);
-        return {
-          ...category,
-          quotes: [...category.quotes, formData]
-        };
-      }
-      return category;
-    });
-
-    const isNewCategory = !updatedCategories.some(category => category.name === formData.category);
-
-    if (isNewCategory) {
-      console.log('Adding new category:', formData.category);
-      updatedCategories.push({
-        name: formData.category,
-        quotes: [formData]
-      });
-    }
-    localStorage.setItem('quotes', JSON.stringify(updatedCategories));      //Save all quotes bk to localStorage..
-    console.log('Updated categories in localStorage:', updatedCategories);
-    // const jsonDataString = JSON.stringify(updatedCategories);
-    // const blob = new Blob([jsonDataString], { type: 'application/json' });
-    // const url = URL.createObjectURL(blob);
-    // const a = document.createElement('a');                     //Link element to trigger the download..
-    // a.href = url;
-    // a.download = 'localStorage.json';
-    // //Append  link to the DOM, trigger the download, nd clean up..
-    // document.body.appendChild(a);
-    // a.click();
-    // document.body.removeChild(a);
-    // URL.revokeObjectURL(url);
+  const handleCategoryDisplay = (e) => {
+    const category = e.target.value;
+    setSelectedListIndex(lists.findIndex(list => list === category)); // Set selected list index
   };
 
   return (
     <div className="add-form-container">
-      <h3>Add List of Quotes</h3>
-      <form onSubmit={handleSubmit}>
-      <div className="form-group">
-          <label>List Name:</label>
-          <input
-            type="text"
-            name="listName"
-            value={formData.listName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <h3>Add Quotes</h3>
+      <form onSubmit={handleAddQuote}>
         <div className="form-group">
           <label>Quote:</label>
           <input
@@ -106,38 +139,54 @@ const AddForm = ({ formData, onAddFormData, onAddQuote,  onSetNewQuote, newQuote
             required
           />
         </div>
+        <div className='select-category'>
+          <select value={lists[selectedListIndex]} onChange={handleCategoryDisplay}>
+            <option value="">Select Category</option>
+            {lists.map((list, index) => (
+              <option key={index} value={list}>{list}</option>
+            ))}
+          </select>
+        </div>
         <div className="form-actions">
           <button type="submit" className='add'>Add</button>
-          <button type="button" onClick={handleSaveToJSON} className='save'>Save</button>
         </div>
       </form>
 
-      {/* to display the newly added quote */}
-      {newQuote && (
-        <div className="new-quote-container">
-          <blockquote>
-            <p><strong>List: </strong>{newQuote.listName}</p>
-            <p><strong>Quote: </strong><q>{newQuote.quote}</q></p>
-            <p><strong>Author: </strong>{newQuote.author}</p>
-            <p><strong>Category: </strong>{newQuote.category}</p>
-          </blockquote>
+      <h3>Add List</h3>
+      <form onSubmit={handleAddList}>
+        <div className="form-group">
+          <label>List Name:</label>
+          <input
+            type="text"
+            name="listName"
+            value={formData.listName}
+            onChange={handleChange}
+            required
+          />
         </div>
-      )}
+        <div className="form-actions">
+          <button type="submit" className='add'>Add</button>
+        </div>
+      </form>
+      <div className='select-category'>
+          <select value={lists[selectedListIndex]} onChange={handleCategoryDisplay}>
+            <option value="">Select Category</option>
+            {lists.map((list, index) => (
+              <option key={index} value={list}>{list}</option>
+            ))}
+          </select>
+          <button className="delList" onClick={handleClickDelete}>Delete</button>
+        </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  //newQuote, formData from Redux store..
   formData: state.add.formData,
-  newQuote: state.add.newQuote, 
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddQuote: (quotes) => dispatch(addQuote(quotes)), 
-  onAddFormData: (formData) => dispatch(addFormData(formData)), 
-  onSetNewQuote: (newQuote) => dispatch(setNewQuote(newQuote)),
-  onResetFormData: () => dispatch(resetFormData()), 
+  onAddFormData: (formData) => dispatch(addFormData(formData)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuote);

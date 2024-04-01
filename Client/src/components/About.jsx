@@ -10,7 +10,7 @@ const About = () => {
       <div className='about-content'>
       <p>Welcome to Quotephoria, your go-to destination for an eclectic mix of quotes that evoke a wide spectrum of emotions, from joy and inspiration to introspection and resilience. Quotephoria isn't just about the uplifting and motivational; it's a celebration of the complexity of human experience, encompassing the poignant, the raw, and the rebellious.</p>
       <br />
-      <p> Myself Habiba Baig, and I'm the founder of Quotephoria. As a lifelong lover of language and literature, I've always been fascinated by the power of words to stir emotions, provoke thoughts, and inspire action. My journey with Quotephoria began as a personal quest to curate a collection that resonated with the diverse range of emotions we encounter in our daily lives.</p>
+      <p> Myself HHB, and I'm the founder of Quotephoria. As a lifelong lover of language and literature, I've always been fascinated by the power of words to stir emotions, provoke thoughts, and inspire action. My journey with Quotephoria began as a personal quest to curate a collection that resonated with the diverse range of emotions we encounter in our daily lives.</p>
       <br />
       <p>Driven by my passion for exploring the human condition through literature, I embarked on a mission to create a platform where individuals could find solace, inspiration, and connection through the shared experiences captured within the lines of quotes. Quotephoria is the culmination of that vision—a space where emotions intertwine with words to create an exhilarating tapestry of expression.</p>
       <br />

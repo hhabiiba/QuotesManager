@@ -13,7 +13,7 @@ const List = ({ quoteLists, addQuoteList, deleteQuoteList, updateQuoteList }) =>
   });
 
   useEffect(() => {
-    console.log('Quote Lists:', quoteLists);
+    // console.log('Quote Lists:', quoteLists);
   }, [quoteLists]);
 
   const handleAddList = () => {
@@ -30,14 +30,14 @@ const List = ({ quoteLists, addQuoteList, deleteQuoteList, updateQuoteList }) =>
         author: '',
         category: ''
       });
-      console.log('New list added:', newList);
+      // console.log('New list added:', newList);
     }
   };
 
   const handleDeleteList = (listId) => {
     if (window.confirm('Are u sure u want to delete this list?')) {
       deleteQuoteList(listId);
-      console.log('List deleted:', listId);
+      // console.log('List deleted:', listId);
     }
   };
 
@@ -48,7 +48,7 @@ const List = ({ quoteLists, addQuoteList, deleteQuoteList, updateQuoteList }) =>
           ...list,
           quotes: [...list.quotes, newQuote]
         };
-        console.log('Quote added to list:', newQuote);
+        // console.log('Quote added to list:', newQuote);
         updateQuoteList(updatedList); 
         return updatedList;
       }

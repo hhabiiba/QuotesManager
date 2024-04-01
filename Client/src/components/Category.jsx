@@ -1,68 +1,125 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import quotesData from '../../data/quotesList.json';
-import { setQuotes } from '../actions/categoryAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { setQuotesListData } from '../reducers/quotesReducer';
 import '../CSS/category.css';
+import axios from 'axios';
 
-const Categories = ({ quotes, setQuotes }) => {
-  const { name } = useParams(); // extracting the name parameter from the URL (/:name)
-  const [votes, setVotes] = useState({}); // store the voting counts
-  const [ratings, setRatings] = useState({}); // ratings for each quote
+const Category = () => {
+  const { categoryName } = useParams();
+  const [categoryQuotes, setCategoryQuotes] = useState([]);
+  const [votes, setVotes] = useState({});
+  const [ratings, setRatings] = useState({});
+  const [updateFormData, setUpdateFormData] = useState({
+    quote: '',
+    author: '',
+    category: ''
+  });
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [modifyId, setModifyId] = useState('');
+  const dispatch = useDispatch();
+  const quotesListData = useSelector(state => state.quote.quoteListData);
 
   useEffect(() => {
-    console.log("Category:", name);
-    const categoryData = quotesData.find((cat) => cat.name === name);
-    console.log("categoryData:", categoryData);
-    if (categoryData) {
-      initializeVotesAndRatings(categoryData.quotes);
-    } else {
-      console.error(`No quotes found for category: ${name}`);
+    if (quotesListData && quotesListData.length > 0) {
+      const categoryQuotes = quotesListData.find(category => category.name === categoryName)?.quotes || [];
+      setCategoryQuotes(categoryQuotes);
+      initializeVotesAndRatings(categoryQuotes);
     }
-  }, [name]);
+  }, [categoryName, quotesListData]);
 
   const initializeVotesAndRatings = (quotes) => {
     const initialVotes = {};
     const initialRatings = {};
-    quotes.forEach((q) => {
-      initialVotes[q.quote] = { thumbsUp: 0, thumbsDown: 0 }; // Initialize vote counts for each quote
-      initialRatings[q.quote] = 0; // Initialize ratings for each quote
+    quotes.forEach((quote) => {
+      initialVotes[quote.quote] = { thumbsUp: 0, thumbsDown: 0 };
+      initialRatings[quote.quote] = 0;
     });
-    // Set initial votes and ratings to the state
     setVotes(initialVotes);
     setRatings(initialRatings);
-    setQuotes(quotes);
   };
 
-  //Delete entire lists..
-  const handleDeleteCategory = () => {
-    if (name === name) {
-      setQuotes([]);
-    } 
-  };
-  
-  //Delete selected quote..
-  const handleDeleteQuote = (quote) => {
-    const updatedQuotes = quotes.filter(q => q !== quote);// filter out the quote to be deleted from the current list of quotes..
-    setQuotes(updatedQuotes)
-  }
-  
-  const handleVote = (text, type) => {
+  const handleVote = (quote, type) => {
     const updatedVotes = { ...votes };
-    updatedVotes[text.quote][type]++; // Increment the vote count for the selected quote and type
+    updatedVotes[quote][type]++;
     setVotes(updatedVotes);
   };
 
-  const handleRating = (text, rating) => {
+  const handleRating = (quote, rating) => {
     const updatedRatings = { ...ratings };
-    updatedRatings[text.quote] = rating; // Update the rating for the selected quote
+    updatedRatings[quote] = rating;
     setRatings(updatedRatings);
   };
 
-  const renderStars = (text) => {
-    const rating = ratings[text.quote];
+  const handleDeleteQuote = async (quote) => {
+    try {
+      const updatedQuotesListData = quotesListData.map(category => {
+        if (category.name === categoryName) {
+          return {
+            ...category,
+            quotes: category.quotes.filter(q => q.id !== quote.id)
+          };
+        }
+        return category;
+      });
+      await axios.delete(`http://localhost:4000/api/quotes/${quote.id}`);
+      updateQuotesListData(updatedQuotesListData);
+    } catch (error) {
+      console.error('Error deleting quote:', error);
+    }
+  };
+
+  const updateQuotesListData = (updatedQuotesListData) => {
+    dispatch(setQuotesListData(updatedQuotesListData));
+    localStorage.setItem('quotesListData', JSON.stringify(updatedQuotesListData));
+  };
+
+  const handleUpdateQuote = (quote) => {
+    setModifyId(quote.id);
+    setUpdateFormData({
+      quote: quote.quote,
+      author: quote.author,
+      category: quote.category
+    });
+    setShowUpdateForm(true);
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateFormData({ ...updateFormData, [name]: value });
+  };
+
+  const handleFormSubmit = async () => {
+    try {
+      await axios.put(`http://localhost:4000/api/quotes/${modifyId}`, updateFormData);
+      updateQuotesListData(quotesListData.map(category => {
+        if (category.name === categoryName) {
+          return {
+            ...category,
+            quotes: category.quotes.map(q => {
+              if (q.id === modifyId) {
+                return { ...q, ...updateFormData };
+              }
+              return q;
+            })
+          };
+        }
+        return category;
+      }));
+      setUpdateFormData({
+        quote: '',
+        author: '',
+        category: ''
+      });
+      setShowUpdateForm(false);
+    } catch (error) {
+      console.error('Error updating quote:', error);
+    }
+  };
+
+  const renderStars = (quote) => {
+    const rating = ratings[quote];
     const stars = [];
-    // Loop to create star icons
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <span
@@ -76,66 +133,42 @@ const Categories = ({ quotes, setQuotes }) => {
             left: '200px',
             color: i <= rating ? 'gold' : 'gray',
           }}
-          onClick={() => handleRating(text, i)}
-        >
-          ★
-        </span>
+          onClick={() => handleRating(quote, i)}>★</span>
       );
     }
     return stars;
   };
 
-  const handleLoad = () => {
-    const storedData = localStorage.getItem('quotes');
-    console.log('Stored data:', storedData);
-    if (storedData) {
-      try {
-        const data = JSON.parse(storedData);
-        const quotes = data.flatMap(category => category.quotes);
-        setQuotes(quotes);
-        initializeVotesAndRatings(quotes);
-      } catch (error) {
-        console.error('Err parsin JSON data:', error);
-      }
-    } else {
-      console.error('No data found in localStorage.');
-    }
-  };
-
   return (
     <div className='categories-container'>
-      <Link to="/" className="back-cat"></Link>
-      <h3 className='category-heading'>List of Quotes - {name}~</h3>
-      <button className='load' onClick={handleLoad}>Load</button>
-      <button className="delete-category" onClick={handleDeleteCategory}>Delete Category</button>
-      {/* Map over the filtered quotes and display each quote */}
-      {quotes.map((text, index) => (
+      <h3 className='category-heading'>Quotes in Category - {categoryName}</h3>
+      {categoryQuotes.map((quote, index) => (
         <blockquote key={index} className='category-quote'>
-          <p className='quote-content'><strong>Quote:    </strong><q>{text.quote}</q></p>
-          <p className='quote-content'><strong>Author:   </strong>-  {text.author}</p>
-          <p className='quote-content'><strong>Category: </strong>   {text.category}</p>
-          <button className='delete' onClick={() => handleDeleteQuote(text)}>&#10060;</button>
+          <p className='quote-content'><strong>Quote:    </strong><q>{quote.quote}</q></p>
+          <p className='quote-content'><strong>Author:   </strong>-  {quote.author}</p>
+          <button className='delete' onClick={() => handleDeleteQuote(quote, index)}>&#10060;</button>
+          <button className='update' onClick={() => handleUpdateQuote(quote, index)}>&#9998;</button>
           <div className='vote-actions'>
-            <button onClick={() => handleVote(text, 'thumbsUp')}>👍 {votes[text.quote]?.thumbsUp}</button>
-            <button onClick={() => handleVote(text, 'thumbsDown')}>👎 {votes[text.quote]?.thumbsDown}</button>
+            <button onClick={() => handleVote(quote.quote, 'thumbsUp')}>👍 {votes[quote.quote]?.thumbsUp}</button>
+            <button onClick={() => handleVote(quote.quote, 'thumbsDown')}>👎 {votes[quote.quote]?.thumbsDown}</button>
           </div>
           <br />
           <div className='stars'>
-            {renderStars(text)}
+            {renderStars(quote.quote)}
           </div>
           <br />
         </blockquote>
       ))}
+      {showUpdateForm && (
+        <div>
+          <input type="text" name="quote" value={updateFormData.quote} onChange={handleFormChange} />
+          <input type="text" name="author" value={updateFormData.author} onChange={handleFormChange} />
+          <input type="text" name="category" value={updateFormData.category} onChange={handleFormChange} />
+          <button onClick={handleFormSubmit}>Confirm</button>
+        </div>
+      )}
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  quotes: state.category.quotes
-});
-
-const mapDispatchToProps = {
-  setQuotes
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default Category;

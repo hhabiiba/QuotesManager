@@ -7,7 +7,6 @@ const quoteListSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Quote' 
   }
-]
 });
 
 quoteListSchema.set('toJSON', {
