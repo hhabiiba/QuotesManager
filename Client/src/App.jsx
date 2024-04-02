@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {fetchAllQuotes} from './services/quoteService'
 import { setQuotesListData } from './reducers/quotesReducer';
 import Home from './components/Home';
@@ -17,7 +17,6 @@ import Login from './components/Login';
 import Signup from './components/SignUp';
 
 const App = () => {
-  
   const dispatch = useDispatch();
 
   useEffect(() => {

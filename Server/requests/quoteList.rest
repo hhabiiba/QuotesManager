@@ -5,14 +5,14 @@ GET http://localhost:4000/api/quoteLists/receive
 GET http://localhost:4000/api/quoteLists
 
 ### GET by ID
-GET http://localhost:4000/api/quoteLists/
+GET http://localhost:4000/api/quoteLists/660513811d1853aa27f87b96
 
 ### Create
-POST http://localhost:4000/api/quoteLists/65fad7105fa8d1b66af850b4
+POST http://localhost:4000/api/quoteLists/660510e71d1853aa27f87b8d
 Content-Type: application/json
 
 {
-  "name": " Test Quotes List"
+  "name": " General Quotes List"
 }
 
 
@@ -25,9 +25,9 @@ Content-Type: application/json
 }
 
 ### DELETE by ID
-DELETE http://localhost:4000/api/quoteLists/65fcf10de4b931b51a942a9a
+DELETE http://localhost:4000/api/quoteLists/6606b87b95506159236634cd
 Content-Type: application/json
 
 {
-  "userId": "65faea3fe81c81504b1abd82"
+  "userId": "660510e71d1853aa27f87b8d"
 }

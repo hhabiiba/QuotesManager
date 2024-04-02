@@ -5,7 +5,7 @@ GET http://localhost:4000/api/users/receive
 GET http://localhost:4000/api/users
 
 ### GET by ID
-GET http://localhost:4000/api/users/
+GET http://localhost:4000/api/users/66037e2c02ce9f0610e077fe
 
 ### Create
 POST http://localhost:4000/api/users
@@ -26,4 +26,4 @@ Content-Type: application/json
 }
 
 ### DELETE by ID
-DELETE http://localhost:4000/api/users/65fd51b705c94c36c86f3a6f
+DELETE http://localhost:4000/api/users/660510e71d1853aa27f87b8d
