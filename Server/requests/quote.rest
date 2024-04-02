@@ -11,13 +11,13 @@ GET http://localhost:4000/api/quotes
 GET http://localhost:4000/api/quotes/
 
 ### Create
-POST http://localhost:4000/api/quotes/6607b4e5be8db53677f783fb
+POST http://localhost:4000/api/quotes/6605136f1d1853aa27f87b92
 Content-Type: application/json
 
 {
-  "quote": "duh!",
-  "author": "bruh!",
-  "category": "Other"
+  "quote": "Running Quote",
+  "author": "You",
+  "category": "Pure"
 }
 
 ### UPDATE by ID

@@ -25,12 +25,19 @@ app.use(middleware.unknownEndpoint);
 
 // Connect to MongoDB
 connectDB()
-    .then(() => {
-        const PORT = process.env.PORT || 4000;
-        app.listen(PORT, () => {
-            console.log(`Server running on PORT: ${PORT}`);
-        });
-    })
-    .catch((err) => {
-        console.error('Error connecting to MongoDB:', err);
-    });
+    // .then(() => {
+    //     const PORT = process.env.PORT || 4000;
+    //     export const server =  app.listen(PORT, () => {
+    //         console.log(`Server running on PORT: ${PORT}`);
+    //     });
+    // })
+    // .catch((err) => {
+    //     console.error('Error connecting to MongoDB:', err);
+    // });
+
+const PORT = process.env.PORT || 4000;
+const server = app.listen(PORT, () => {
+    console.log(`Server running on PORT: ${PORT}`);
+});
+
+module.exports = server;
