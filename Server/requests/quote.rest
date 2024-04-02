@@ -8,27 +8,27 @@ GET http://localhost:4000/api/quotes/receive
 GET http://localhost:4000/api/quotes
 
 ### GET by ID
-GET http://localhost:4000/api/quotes/65faa1d0044a892e9fba88c6
+GET http://localhost:4000/api/quotes/
 
 ### Create
-POST http://localhost:4000/api/quotes
+POST http://localhost:4000/api/quotes/6605136f1d1853aa27f87b92
 Content-Type: application/json
 
 {
-  "quote": "Coding in Color",
-  "author": "- T.A.Y",
-  "category": "Coders"
+  "quote": "Running Quote",
+  "author": "You",
+  "category": "Pure"
 }
 
 ### UPDATE by ID
-PUT http://localhost:4000/api/quotes/65fb033df93e1f63b67f8142
+PUT http://localhost:4000/api/quotes/66066642ce3b3bd7cfe91aa4
 Content-Type: application/json
 
 {
   "quote": "Testing PUT request on PORT 4000",
   "author": "Updated author",
-  "category": "Updated category"
+  "category": "Don't Dare"
 }
 
 ### DELETE by ID
-DELETE http://localhost:4000/api/quotes/65fb033df93e1f63b67f8142
+DELETE http://localhost:4000/api/quotes/65fd4f1886fd478c0dc09382

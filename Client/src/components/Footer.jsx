@@ -23,10 +23,10 @@ const Footer = () => {
         <p><a href="#" className='explore-link'>Partner Websites</a></p>
       </div>
       <div className='social-media'>
-        <a href="https://www.instagram.com/__H.H.B__" className='social-link'>
+        <a href="https://www.instagram.com" className='social-link'>
           <img src={instagramLogo} alt="Instagram" className='social-icon'/>
         </a>
-        <a href="https://discord.com/i_was.reloading_" className='social-link'>
+        <a href="https://discord.com/" className='social-link'>
           <img src={discordLogo} alt="Discord" className='social-icon' />
         </a>
       </div>

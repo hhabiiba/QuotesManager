@@ -37,7 +37,7 @@ const EditForm = ({ selectedCategory, quotesForSelectedCategory,  selectedQuote,
 
   const handleUpdate = () => {      //handles updating a quote with the new values.
     const updatedQuote = { ...selectedQuote, name: formData.listName, ...selectedQuote, quote: formData.quoteText, author: formData.author, category: formData.category };
-    console.log('Updated content: ', updatedQuote);
+    // console.log('Updated content: ', updatedQuote);
     setSelectedQuote(updatedQuote); //updates selectedQuote in store..
     setIsEditing(false);
   };
