@@ -1,0 +1,77 @@
+.signup-container {
+    max-width: 400px;
+    margin-top: 60px;
+    margin-left: 364px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .signup-container h2 {
+    margin-bottom: 20px;
+    margin-left: 134px;
+  }
+  
+  .signup-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-container form div {
+    margin-bottom: 10px;
+    margin-top: 25px;
+  }
+  
+  .signup-container form label {
+    font-weight: bold;
+  }
+  
+  .signup-container form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .signup-container form button {
+    padding: 10px;
+    margin-left: 135px;
+    margin-top: 17px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 24%;
+  }
+  
+  .signup-container form button:hover {
+    background-color: #218838;
+  }
+  .signup-container .err {
+    margin-top: 20px;
+    color: red;
+    font-weight: bold;
+  }
+  .signup-container p {
+    margin-top: 40px;
+    margin-left: 60px;
+    color: rgb(60, 0, 255);
+    font-weight: bold;
+  }
+
+  .back-sign{
+    display: inline-block; 
+    background-image: url('../assets/back.png');
+    background-size: cover;
+    width: 45px; 
+    height: 45px;
+    position: relative;
+    bottom: 121px;
+    right: 540px;
+  }
+  
+  .back-sign:hover {
+    opacity: 0.9; 
+  }
