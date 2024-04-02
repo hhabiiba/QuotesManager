@@ -1,0 +1,38 @@
+name: Production Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Check out code from the repository
+      - name: Check out code
+        uses: actions/checkout@v4
+      
+      # Step 2: Set up the Node environment
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4.0.2
+  
+      # Step 3: Install dependencies in the frontend directory
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: ./Client
+
+      # Step 4: Install dependencies in the server directory
+      - name: Install server dependencies
+        run: npm install
+        working-directory: ./Server
+      
+      
+      # # Step 7: Run server deploy hook using curl and secrets
+      # - name: Run server deploy hook
+      #   run: curl ${{secrets.SERVER}}
+      
+      # # Step 8: Run frontend deploy hook using curl and secrets
+      # - name: Run frontend deploy hook
+      #   run: curl ${{secrets.CLIENT}}
