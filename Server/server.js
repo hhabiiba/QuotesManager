@@ -14,6 +14,10 @@ app.use(cors());
 app.use(express.json());
 app.use(middleware.requestLogger);
 
+app.get('/', (req, res) => {
+    res.send("hello")
+})
+
 // Routes
 app.use('/api/quotes', quoteRouter);
 app.use('/api/quoteLists', quoteListsRouter);
